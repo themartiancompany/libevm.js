@@ -208,22 +208,34 @@ function
 
 function
   _libevm_url_parse() {
+  /* global
+       _argv_url_get */
+  /* eslint-disable-next-line
+       no-global-assign */
   wallet_path =
     _argv_url_get(
       "wallet_path")[
         0];
+  /* eslint-disable-next-line
+       no-global-assign */
   wallet_password =
     _argv_url_get(
       "wallet_password")[
         0];
+  /* eslint-disable-next-line
+       no-global-assign */
   wallet_seed =
     _argv_url_get(
       "wallet_seed")[
         0];
+  /* eslint-disable-next-line
+       no-global-assign */
   api_key =
     _argv_url_get(
       "api_key")[
         0];
+  /* eslint-disable-next-line
+       no-global-assign */
   target_networks.push(
     _argv_url_get(
       "network")[
