@@ -32,11 +32,8 @@ const
     require(
       'crash-js');
 /* global
-     _json_parse */
-_json_parse =
-  _libcrash._path_join;
-/* global
-     _path_join */
+     _path_join:
+       writable */
 _path_join =
   _libcrash._path_join;
 const
@@ -62,19 +59,18 @@ function
     _contract_name,
     _network_chain_id,
     _version) {
-  let
-    _file_name,
-    _path;
-  _file_name =
-    _contract_name.concat(
-      ".abi.json");
-  _path =
-    _path_join(
-      [_deployments_dir,
-       _contract_name,
-       _network_chain_id,
-       _version,
-       _file_name]);
+  const
+    _file_name =
+      _contract_name.concat(
+        ".abi.json");
+  const
+    _path =
+      _path_join(
+        [_deployments_dir,
+         _contract_name,
+         _network_chain_id,
+         _version,
+         _file_name]);
   return _path;
 }
 
@@ -84,19 +80,18 @@ function
     _contract_name,
     _network_chain_id,
     _version) {
-  let
-    _file_name,
-    _path;
-  _file_name =
-    _contract_name.concat(
-      ".bin");
-  _path =
-    _path_join(
-      [_deployments_dir,
-       _contract_name,
-       _network_chain_id,
-       _version,
-       _file_name]);
+  const
+    _file_name =
+      _contract_name.concat(
+        ".bin");
+  const
+    _path =
+      _path_join(
+        [_deployments_dir,
+         _contract_name,
+         _network_chain_id,
+         _version,
+         _file_name]);
   return _path;
 }
 
@@ -126,6 +121,8 @@ function
   _libevm_cmdline_parse(
     _argv) {
   if ( "w" in _argv ) {
+    /* global
+         wallet_path */
     wallet_path =
       _argv[
         "w"];
@@ -136,6 +133,8 @@ function
         "wallet-path"];
   }
   if ( "p" in _argv ) {
+    /* global
+         wallet_password */
     wallet_password =
       _argv[
         "p"];
@@ -146,6 +145,8 @@ function
         "wallet-password"];
   }
   if ( "s" in _argv ) {
+    /* global
+         wallet_seed */
     wallet_seed =
       _argv[
         "s"];
@@ -156,6 +157,8 @@ function
         "wallet-seed"];
   }
   if ( "k" in _argv ) {
+    /* global
+         api_key */
     api_key =
       _argv[
         "k"];
@@ -166,6 +169,8 @@ function
         "api-key"];
   }
   if ( "n" in _argv ) {
+    /* global
+         target_networks */
     target_networks.push(
       _argv[
         "n"]);
@@ -192,4 +197,4 @@ module.exports = {
     _libevm_cmdline_parse,
   _rpc_backend_get:
     _rpc_backend_get
-}
+};
