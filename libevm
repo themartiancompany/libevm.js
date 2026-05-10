@@ -113,7 +113,8 @@ function
 }
 
 function
-  _libevm_cmdline_parse() {
+  _libevm_cmdline_parse(
+    _argv) {
   if ( "w" in _argv ) {
     wallet_path =
       _argv[
