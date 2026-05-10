@@ -138,6 +138,8 @@ function
         "w"];
   }
   if ( "wallet-path" in _argv ) {
+    /* eslint-disable-next-line
+         no-global-assign */
     wallet_path =
       _argv[
         "wallet-path"];
@@ -152,6 +154,8 @@ function
         "p"];
   }
   if ( "wallet-password" in _argv ) {
+    /* eslint-disable-next-line
+         no-global-assign */
     wallet_path =
       _argv[
         "wallet-password"];
@@ -166,6 +170,8 @@ function
         "s"];
   }
   if ( "wallet-seed" in _argv ) {
+    /* eslint-disable-next-line
+         no-global-assign */
     wallet_seed =
       _argv[
         "wallet-seed"];
@@ -180,6 +186,8 @@ function
         "k"];
   }
   if ( "api-key" in _argv ) {
+    /* eslint-disable-next-line
+         no-global-assign */
     api_key =
       _argv[
         "api-key"];
