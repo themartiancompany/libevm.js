@@ -255,6 +255,8 @@ module.exports = {
     _evm_chain_info_get,
   _libevm_cmdline_parse:
     _libevm_cmdline_parse,
+  _libevm_url_parse:
+    _libevm_url_parse,
   _rpc_backend_get:
     _rpc_backend_get
 };
