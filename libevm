@@ -112,6 +112,60 @@ function
   return _path;
 }
 
+function
+  _libevm_cmdline_parse() {
+  if ( "w" in _argv ) {
+    wallet_path =
+      _argv[
+        "w"];
+  }
+  if ( "wallet-path" in _argv ) {
+    wallet_path =
+      _argv[
+        "wallet-path"];
+  }
+  if ( "p" in _argv ) {
+    wallet_password =
+      _argv[
+        "p"];
+  }
+  if ( "wallet-password" in _argv ) {
+    wallet_path =
+      _argv[
+        "wallet-password"];
+  }
+  if ( "s" in _argv ) {
+    wallet_seed =
+      _argv[
+        "s"];
+  }
+  if ( "wallet-seed" in _argv ) {
+    wallet_seed =
+      _argv[
+        "wallet-seed"];
+  }
+  if ( "k" in _argv ) {
+    api_key =
+      _argv[
+        "k"];
+  }
+  if ( "api-key" in _argv ) {
+    api_key =
+      _argv[
+        "api-key"];
+  }
+  if ( "n" in _argv ) {
+    target_networks.push(
+      _argv[
+        "n"]);
+  }
+  if ( "network" in _argv ) {
+    target_networks.push(
+      _argv[
+        "network"]);
+  }
+}
+
 module.exports = {
   _contract_abi_get:
     _contract_abi_get,
@@ -123,6 +177,8 @@ module.exports = {
     _evm_chains_db_path_get,
   _evm_chain_info_get:
     _evm_chain_info_get,
+  _libevm_cmdline_parse:
+    _libevm_cmdline_parse,
   _rpc_backend_get:
     _rpc_backend_get
 }
