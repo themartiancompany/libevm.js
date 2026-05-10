@@ -206,6 +206,30 @@ function
   }
 }
 
+function
+  _libevm_url_parse() {
+  wallet_path =
+    _argv_url_get(
+      "wallet_path")[
+        0];
+  wallet_password =
+    _argv_url_get(
+      "wallet_password")[
+        0];
+  wallet_seed =
+    _argv_url_get(
+      "wallet_seed")[
+        0];
+  api_key =
+    _argv_url_get(
+      "api_key")[
+        0];
+  target_networks.push(
+    _argv_url_get(
+      "network")[
+        0]);
+}
+
 module.exports = {
   _contract_abi_get:
     _contract_abi_get,
