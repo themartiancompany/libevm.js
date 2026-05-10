@@ -27,13 +27,16 @@
  *     If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* eslint-disable
+     no-unused-vars */
 const
   _libcrash =
     require(
       'crash-js');
 /* global
-     _path_join:
-       writable */
+     _path_join */
+/* eslint-disable-next-line
+     no-native-reassign */
 _path_join =
   _libcrash._path_join;
 const
@@ -42,14 +45,20 @@ const
       'evm-chains-info');
 /* global
      _evm_chains_db_path_get */
+/* eslint-disable-next-line
+     no-native-reassign */
 _evm_chains_db_path_get =
   _evm_chains_info_module._evm_chains_db_path_get;
 /* global
      _rpc_backend_get */
+/* eslint-disable-next-line
+     no-native-reassign */
 _rpc_backend_get =
   _evm_chains_info_module._rpc_backend_get;
 /* global
-     _evm_chains_info_get */
+     _evm_chain_info_get */
+/* eslint-disable-next-line
+     no-native-reassign */
 _evm_chain_info_get =
   _evm_chains_info_module._evm_chain_info_get;
 
@@ -101,19 +110,18 @@ function
     _contract_name,
     _network_chain_id,
     _version) {
-  let
-    _file_name,
-    _path;
-  _file_name =
-    _contract_name.concat(
-      ".json");
-  _path =
-    _path_join(
-      [_deployments_dir,
-       _contract_name,
-       _network_chain_id,
-       _version,
-       _file_name]);
+  const
+    _file_name =
+      _contract_name.concat(
+        ".json");
+  const
+    _path =
+      _path_join(
+        [_deployments_dir,
+         _contract_name,
+         _network_chain_id,
+         _version,
+         _file_name]);
   return _path;
 }
 
@@ -123,6 +131,8 @@ function
   if ( "w" in _argv ) {
     /* global
          wallet_path */
+    /* eslint-disable-next-line
+         no-native-reassign */
     wallet_path =
       _argv[
         "w"];
@@ -135,6 +145,8 @@ function
   if ( "p" in _argv ) {
     /* global
          wallet_password */
+    /* eslint-disable-next-line
+         no-native-reassign */
     wallet_password =
       _argv[
         "p"];
@@ -147,6 +159,8 @@ function
   if ( "s" in _argv ) {
     /* global
          wallet_seed */
+    /* eslint-disable-next-line
+         no-native-reassign */
     wallet_seed =
       _argv[
         "s"];
@@ -159,6 +173,8 @@ function
   if ( "k" in _argv ) {
     /* global
          api_key */
+    /* eslint-disable-next-line
+         no-native-reassign */
     api_key =
       _argv[
         "k"];
