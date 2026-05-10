@@ -31,18 +31,28 @@ const
   _libcrash =
     require(
       'crash-js');
+/* global
+     _json_parse */
 _json_parse =
   _libcrash._path_join;
+/* global
+     _path_join */
 _path_join =
   _libcrash._path_join;
 const
   _evm_chains_info_module =
     require(
       'evm-chains-info');
+/* global
+     _evm_chains_db_path_get */
 _evm_chains_db_path_get =
   _evm_chains_info_module._evm_chains_db_path_get;
+/* global
+     _rpc_backend_get */
 _rpc_backend_get =
   _evm_chains_info_module._rpc_backend_get;
+/* global
+     _evm_chains_info_get */
 _evm_chain_info_get =
   _evm_chains_info_module._evm_chain_info_get;
 
