@@ -34,6 +34,12 @@ const
     require(
       'crash-js');
 /* global
+     _msg_info */
+/* eslint-disable-next-line
+     no-global-assign */
+_path_join =
+  _libcrash._msg_info;
+/* global
      _path_join */
 /* eslint-disable-next-line
      no-global-assign */
@@ -148,11 +154,15 @@ function
   /* global
        deployments_dir:
          writable */
+  /* eslint-disable-next-line
+       no-global-assign */
   deployments_dir =
     "";
   /* global
        user_level:
          writable */
+  /* eslint-disable-next-line
+       no-global-assign */
   user_level =
     "";
 }
@@ -222,91 +232,64 @@ function
 }
 
 function
+  _secret_auto_detet() {
+  true;
+}
+
+function
   _libevm_cmdline_parse(
     _argv) {
   if ( "N" in _argv ) {
-    /* global
-         wallet_name */
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_name =
       _argv[
         "N"];
   }
   if ( "wallet-name" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_name =
       _argv[
         "wallet-name"];
   }
   if ( "w" in _argv ) {
-    /* global
-         wallet_path */
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_path =
       _argv[
         "w"];
   }
   if ( "wallet-path" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_path =
       _argv[
         "wallet-path"];
   }
   if ( "p" in _argv ) {
-    /* global
-         wallet_password */
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_password =
       _argv[
         "p"];
   }
   if ( "wallet-password" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_path =
       _argv[
         "wallet-password"];
   }
   if ( "s" in _argv ) {
-    /* global
-         wallet_seed */
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_seed =
       _argv[
         "s"];
   }
   if ( "wallet-seed" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     wallet_seed =
       _argv[
         "wallet-seed"];
   }
   if ( "k" in _argv ) {
-    /* global
-         api_key */
-    /* eslint-disable-next-line
-         no-global-assign */
     api_key =
       _argv[
         "k"];
   }
   if ( "api-key" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     api_key =
       _argv[
         "api-key"];
   }
   if ( "n" in _argv ) {
-    /* global
-         target_networks */
     target_networks.push(
       _argv[
         "n"]);
@@ -322,8 +305,6 @@ function
   _libevm_url_parse() {
   /* global
        _argv_url_get */
-  /* eslint-disable-next-line
-       no-global-assign */
   wallet_path =
     _argv_url_get(
       "wallet_path")[
@@ -358,8 +339,6 @@ function
   _libevm_app_cmdline_parse(
     _argv) {
   if ( "u" in _argv ) {
-    /* global
-         user_level */
     /* eslint-disable-next-line
          no-global-assign */
     user_level =
@@ -374,8 +353,6 @@ function
         "user_level"];
   }
   if ( "d" in _argv ) {
-    /* global
-         deployments_dir */
     /* eslint-disable-next-line
          no-global-assign */
     deployments_dir =
@@ -442,14 +419,17 @@ function
   }
   if ( _call_auth == "y" ) {
     // undefined
-    _wallet_path =
-      _wallet_path_get();
+    const
+      _wallet_path =
+        _wallet_path_get();
+    // undefined
     _secret_auto_detect(
       "seed",
       "seed",
       _wallet_app,
       _wallet_name,
       _qr_support);
+    // undefined
     _secret_auto_detect(
       "password",
       "plain",
@@ -465,8 +445,12 @@ function
          "",             // _chain_name,
          "",             // _output_file
        );
-    console.log(
-      `Wallet address: '${_wallet_address}'`);
+    // to be turned into _msg_debug
+    const
+      _msg =
+        `Wallet address: '${_wallet_address}'`;
+    _msg_info(
+      _msg);
   }
   else if ( _call_auth == "n" ) {
     if ( typeof(
