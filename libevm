@@ -374,7 +374,12 @@ function
   let
     _wallet_address,
     _wallet_seed,
-    _wallet_password;
+    _wallet_password,
+    _wallet_path;
+  /* eslint-disable
+       prefer-const  */
+  _wallet_seed =
+    "";
   if ( typeof(
          _wallet_app) == "undefined" ||
        _wallet_app == "" ) {
@@ -403,9 +408,8 @@ function
     "";
   if ( _call_auth == "y" ) {
     // undefined
-    const
-      _wallet_path =
-        _wallet_path_get();
+    _wallet_path =
+      _wallet_path_get();
     // undefined
     _secret_auto_detect(
       "seed",
