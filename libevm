@@ -63,6 +63,94 @@ _evm_chain_info_get =
   _evm_chains_info_module._evm_chain_info_get;
 
 function
+  _libevm_global_variables() {
+  /* global
+       call_auth:
+         writable */
+  call_auth =
+    "";
+  /* global
+       wallet_name:
+         writable */
+  wallet_name =
+    "";
+  /* global
+       wallet_path:
+         writable */
+  wallet_path =
+    "";
+  /* global
+       wallet_password:
+         writable */
+  wallet_password =
+    "";
+  /* global
+       wallet_address:
+         writable */
+  wallet_address =
+    "";
+  /* global
+       wallet_seed:
+         writable */
+  wallet_seed =
+    "";
+  /* global
+       api_key:
+         writable */
+  api_key =
+    "";
+  /* global
+       networks_amount:
+         writable */
+  networks_amount =
+    "";
+  /* global
+       target_network:
+         writable */
+  target_network =
+    "";
+  /* global
+       target_networks:
+         writable */
+  target_networks =
+    [];
+  /* global
+       rpc_selection:
+         writable */
+  rpc_selection =
+    "";
+  /* global
+       retries_max:
+         writable */
+  retries_max =
+    "";
+  /* global
+       call_timeout:
+         writable */
+  call_timeout =
+    "";
+  /* global
+       msg_value:
+         writable */
+  msg_value =
+    "";
+}
+
+function
+  _libevm_app_global_variables() {
+  /* global
+       deployments_dir:
+         writable */
+  deployments_dir =
+    "";
+  /* global
+       user_level:
+         writable */
+  user_level =
+    "";
+}
+
+function
   _contract_abi_get(
     _deployments_dir,
     _contract_name,
