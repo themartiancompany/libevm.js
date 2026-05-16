@@ -61,6 +61,14 @@ _rpc_backend_get =
      no-global-assign */
 _evm_chain_info_get =
   _evm_chains_info_module._evm_chain_info_get;
+const
+  _evm_wallet_module =
+    require(
+      "evm-wallet.js");
+const
+  _address_get =
+    _evm_wallet_module._address_get;
+
 
 function
   _libevm_global_variables() {
@@ -329,6 +337,57 @@ function
     _argv_url_get(
       "network")[
         0]);
+}
+
+function
+  _wallet_overrides_set(
+    _wallet_app,
+    _wallet_name,
+    _call_auth,
+    _qr_support) {
+  if ( typeof(
+         _wallet_app) == "undefined" ||
+       _wallet_app == "" ) {
+      _wallet_app =
+        "evm-wallet";
+  }
+  if ( typeof(
+         _wallet_name) == "undefined" ||
+       _wallet_name == "" ) {
+      _wallet_name =
+        "default";
+  }
+  if ( typeof(
+         _call_auth) == "undefined" ||
+       _call_auth == "" ) {
+      _call_auth =
+        "y";
+  }
+  if ( typeof(
+         _qr_support) == "undefined" ||
+       _qr_support == "" ) {
+      _qr_support =
+        "n";
+  }
+  if ( _call_auth == "y" ) {
+    // undefined
+    _wallet_path =
+      _wallet_path_get();
+    _secret_auto_detect(
+      "seed",
+      "seed",
+      _wallet_app,
+      _wallet_name,
+      _qr_support);
+    _secret_auto_detect(
+      "password",
+      "plain",
+      _wallet_app,
+      _wallet_name,
+      _qr_support);
+    // _address_get
+  }
+  
 }
 
 module.exports = {
