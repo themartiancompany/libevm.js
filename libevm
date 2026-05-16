@@ -154,15 +154,11 @@ function
   /* global
        deployments_dir:
          writable */
-  /* eslint-disable-next-line
-       no-global-assign */
   deployments_dir =
     "";
   /* global
        user_level:
          writable */
-  /* eslint-disable-next-line
-       no-global-assign */
   user_level =
     "";
 }
@@ -313,26 +309,18 @@ function
     _argv_url_get(
       "wallet_path")[
         0];
-  /* eslint-disable-next-line
-       no-global-assign */
   wallet_password =
     _argv_url_get(
       "wallet_password")[
         0];
-  /* eslint-disable-next-line
-       no-global-assign */
   wallet_seed =
     _argv_url_get(
       "wallet_seed")[
         0];
-  /* eslint-disable-next-line
-       no-global-assign */
   api_key =
     _argv_url_get(
       "api_key")[
         0];
-  /* eslint-disable-next-line
-       no-global-assign */
   target_networks.push(
     _argv_url_get(
       "network")[
@@ -343,29 +331,21 @@ function
   _libevm_app_cmdline_parse(
     _argv) {
   if ( "u" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     user_level =
       _argv[
         "u"];
   }
   if ( "user-level" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     user_level =
       _argv[
         "user_level"];
   }
   if ( "d" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     deployments_dir =
       _argv[
         "d"];
   }
   if ( "deployments-dir" in _argv ) {
-    /* eslint-disable-next-line
-         no-global-assign */
     deployments_dir =
       _argv[
         "deployments_dir"];
@@ -374,16 +354,10 @@ function
 
 function
   _libevm_app_url_parse() {
-  /* global
-       _argv_url_get */
-  /* eslint-disable-next-line
-       no-global-assign */
   user_level =
     _argv_url_get(
       "user_level")[
         0];
-  /* eslint-disable-next-line
-       no-global-assign */
   deployments_dir =
     _argv_url_get(
       "deployments_dir")[
@@ -397,6 +371,11 @@ function
     _wallet_name,
     _call_auth,
     _qr_support) {
+  let
+    _wallet_address,
+    _wallet_name,
+    _wallet_seed,
+    _wallet_password;
   if ( typeof(
          _wallet_app) == "undefined" ||
        _wallet_app == "" ) {
@@ -421,6 +400,8 @@ function
       _qr_support =
         "n";
   }
+  _wallet_address =
+    "";
   if ( _call_auth == "y" ) {
     // undefined
     const
