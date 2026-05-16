@@ -373,7 +373,6 @@ function
     _qr_support) {
   let
     _wallet_address,
-    _wallet_name,
     _wallet_seed,
     _wallet_password;
   if ( typeof(
