@@ -232,7 +232,11 @@ function
 }
 
 function
-  _secret_auto_detet() {
+  _wallet_path_get() {
+  }
+
+function
+  _secret_auto_detect() {
   true;
 }
 
