@@ -69,7 +69,6 @@ const
   _address_get =
     _evm_wallet_module._address_get;
 
-
 function
   _libevm_global_variables() {
   /* global
@@ -225,6 +224,22 @@ function
 function
   _libevm_cmdline_parse(
     _argv) {
+  if ( "N" in _argv ) {
+    /* global
+         wallet_name */
+    /* eslint-disable-next-line
+         no-global-assign */
+    wallet_name =
+      _argv[
+        "N"];
+  }
+  if ( "wallet-name" in _argv ) {
+    /* eslint-disable-next-line
+         no-global-assign */
+    wallet_name =
+      _argv[
+        "wallet-name"];
+  }
   if ( "w" in _argv ) {
     /* global
          wallet_path */
@@ -340,6 +355,62 @@ function
 }
 
 function
+  _libevm_app_cmdline_parse(
+    _argv) {
+  if ( "u" in _argv ) {
+    /* global
+         user_level */
+    /* eslint-disable-next-line
+         no-global-assign */
+    user_level =
+      _argv[
+        "u"];
+  }
+  if ( "user-level" in _argv ) {
+    /* eslint-disable-next-line
+         no-global-assign */
+    user_level =
+      _argv[
+        "user_level"];
+  }
+  if ( "d" in _argv ) {
+    /* global
+         deployments_dir */
+    /* eslint-disable-next-line
+         no-global-assign */
+    deployments_dir =
+      _argv[
+        "d"];
+  }
+  if ( "deployments-dir" in _argv ) {
+    /* eslint-disable-next-line
+         no-global-assign */
+    deployments_dir =
+      _argv[
+        "deployments_dir"];
+  }
+}
+
+function
+  _libevm_app_url_parse() {
+  /* global
+       _argv_url_get */
+  /* eslint-disable-next-line
+       no-global-assign */
+  user_level =
+    _argv_url_get(
+      "user_level")[
+        0];
+  /* eslint-disable-next-line
+       no-global-assign */
+  deployments_dir =
+    _argv_url_get(
+      "deployments_dir")[
+        0];
+}
+
+
+function
   _wallet_overrides_set(
     _wallet_app,
     _wallet_name,
@@ -385,9 +456,48 @@ function
       _wallet_app,
       _wallet_name,
       _qr_support);
-    // _address_get
+    _wallet_address = 
+       _address_get(
+         _wallet_seed,
+         "",             // _target_network,
+         "",             // _api_key,
+         "",             // _chain_id,
+         "",             // _chain_name,
+         "",             // _output_file
+       );
+    console.log(
+      `Wallet address: '${_wallet_address}'`);
   }
-  
+  else if ( _call_auth == "n" ) {
+    if ( typeof(
+           wallet_seed) == "undefined" ) {
+      wallet_seed =
+        "";
+    }
+    if ( typeof(
+           wallet_password) == "undefined" ) {
+      wallet_password =
+        "";
+    }
+  }
+  if ( typeof(
+         wallet_name) == "undefined" ||
+       wallet_name == "" ) {
+    wallet_name =
+      _wallet_name;
+  }
+  if ( typeof(
+         wallet_path) == "undefined" ||
+       wallet_path == "" ) {
+    wallet_path =
+      _wallet_path;
+  }
+  if ( typeof(
+         wallet_address) == "undefined" ||
+       wallet_address == "" ) {
+    wallet_address =
+      _wallet_address;
+  }
 }
 
 module.exports = {
@@ -401,6 +511,8 @@ module.exports = {
     _evm_chains_db_path_get,
   _evm_chain_info_get:
     _evm_chain_info_get,
+  _libevm_app_cmdline_parse:
+    _libevm_app_cmdline_parse,
   _libevm_cmdline_parse:
     _libevm_cmdline_parse,
   _libevm_url_parse:
