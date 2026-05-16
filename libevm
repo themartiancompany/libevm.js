@@ -162,12 +162,13 @@ function
         ".abi.json");
   const
     _path =
-      _path_join(
-        [_deployments_dir,
-         _contract_name,
-         _network_chain_id,
-         _version,
-         _file_name]);
+      _path_join( [
+        _deployments_dir,
+        _contract_name,
+        _network_chain_id,
+        _version,
+        _file_name
+      ]);
   return _path;
 }
 
