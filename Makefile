@@ -114,6 +114,10 @@ build-man:
 	#   sed \
 	#     "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
 	#     "build/man/$(_PROJECT).1.rst"
+	sed \
+	  "s/insert.version.here/$${_tag}/" \
+	  -i \
+	  "build/man/variables.rst"; \
 	rst2man \
 	  "build/man/$(_PROJECT).1.rst" \
 	  "build/man/$(_PROJECT).1"
