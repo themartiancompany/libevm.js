@@ -114,8 +114,13 @@ build-man:
 	#   sed \
 	#     "s/$(_PROJECT_NPM)/$(_PROJECT)/g" > \
 	#     "build/man/$(_PROJECT).1.rst"
+	_version="$$( \
+	  npm \
+	    view \
+	      "$${PWD}" \
+	      "version")"; \
 	sed \
-	  "s/insert.version.here/$${_tag}/" \
+	  "s/insert.version.here/$${_version}/" \
 	  -i \
 	  "build/man/variables.rst"; \
 	rst2man \
