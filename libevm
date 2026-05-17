@@ -487,6 +487,10 @@ module.exports = {
     _libevm_app_cmdline_parse,
   _libevm_cmdline_parse:
     _libevm_cmdline_parse,
+  _libevm_app_global_variables:
+    _libevm_app_global_variables,
+  _libevm_global_variables:
+    _libevm_global_variables,
   _libevm_url_parse:
     _libevm_url_parse,
   _rpc_backend_get:
