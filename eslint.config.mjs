@@ -63,6 +63,7 @@ export default defineConfig([
      "build/**",
      "eslint.config.js",
      "fs-worker.js",
+     "libevm.js",
      "node_modules/**",
      "man/**"
    ],
