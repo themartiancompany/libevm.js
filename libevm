@@ -494,5 +494,7 @@ module.exports = {
   _libevm_url_parse:
     _libevm_url_parse,
   _rpc_backend_get:
-    _rpc_backend_get
+    _rpc_backend_get,
+  _wallet_overrides_set:
+    _wallet_overrides_set
 };
