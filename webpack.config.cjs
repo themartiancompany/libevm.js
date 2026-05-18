@@ -96,6 +96,10 @@ module.exports = {
   },
   resolve: {
     alias: {
+      "evm-wallet.js":
+        _path.resolve(
+          __dirname,
+          "node_modules/evm-wallet.js/libevm-wallet"),
       "fs":
         _path.resolve(
           __dirname,
