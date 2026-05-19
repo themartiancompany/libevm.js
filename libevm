@@ -286,23 +286,52 @@ function
     _app,
     _wallet_name,
     _qr){
-  if ( _typeof(
+  if ( typeof(
          _secret) == "undefined" ||
        _secret == "" ) {
     _secret =
       "seed";
   }
-  if ( _typeof(
+  if ( typeof(
          _app) == "undefined" ||
        _app == "" ) {
-    _secret =
+    _app =
       "evm-wallet";
   }
-  true;
+  if ( typeof(
+         _wallet_name) == "undefined" ||
+       _wallet_name == "" ) {
+    _wallet_name =
+      "default";
+  }
+  if ( typeof(
+         _qr_support) == "undefined" ||
+       _qr_support == "" ) {
+    _qr_support =
+      "n";
+  }
+  const
+    _config_dir =
+      _path_join( [
+        _homedir_get(),
+        ".config",
+        _app ]);
+  if ( _qr_support == "y" ) {
+    _config_dir =
+      _path_join( [
+        _config_dir,
+        "qr" ]);
+  }
+  const
+    _secret_path =
+      _path_join( [
+        _config_dir,
+        `${_wallet_name}-${_secret}.txt` ]);
+  return _secret_path;
 }
 
 function
-  _secret_auto_detect(
+  _secret_get(
     _secret,
     _secret_type,
     _wallet_app,
@@ -338,6 +367,13 @@ function
     _qr_support =
       "n";
   }
+  _secret_path =
+    _secret_path_get(
+      _secret,
+      _wallet_app,
+      _wallet_name,
+      _qr_support);
+  return _secret_path;
 }
 
 function
@@ -468,8 +504,7 @@ function
         0];
 }
 
-
-function
+async function
   _wallet_overrides_set(
     _wallet_app,
     _wallet_name,
@@ -512,7 +547,7 @@ function
   _wallet_address =
     "";
   _msg =
-    "Getting defaults wallets credentials for " +
+    "Getting default wallets credentials paths for " +
     `app '${_wallet_app}' and wallet '${_wallet_name}'.`;
   _msg_info(
     _msg);
@@ -523,22 +558,36 @@ function
         _wallet_app,
         _wallet_name,
         _qr_support);
-    // undefined
-    _secret_auto_detect(
-      "seed",
-      "seed",
-      _wallet_app,
-      _wallet_name,
-      _qr_support);
-    // undefined
-    _secret_auto_detect(
-      "password",
-      "plain",
-      _wallet_app,
-      _wallet_name,
-      _qr_support);
+    _wallet_seed =
+      _secret_get(
+        "seed",
+        "seed",
+        _wallet_app,
+        _wallet_name,
+        _qr_support);
+    _msg =
+      `Wallet seed: '${_wallet_seed}'`;
+    _msg_info(
+      _msg);
+    _wallet_password =
+      _secret_get(
+        "password",
+        "plain",
+        _wallet_app,
+        _wallet_name,
+        _qr_support);
+    console.log(
+      "hello");
+    await _address_get(
+      _wallet_seed,
+      "",             // _target_network,
+      "",             // _api_key,
+      "",             // _chain_id,
+      "",             // _chain_name,
+      "",             // _output_file
+    );
     _wallet_address = 
-       _address_get(
+       await _address_get(
          _wallet_seed,
          "",             // _target_network,
          "",             // _api_key,
@@ -582,6 +631,7 @@ function
     wallet_address =
       _wallet_address;
   }
+  return true;
 }
 
 module.exports = {
