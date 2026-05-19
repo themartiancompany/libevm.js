@@ -34,10 +34,16 @@ const
     require(
       'crash-js');
 /* global
+     _homedir_get */
+/* eslint-disable-next-line
+     no-global-assign */
+_homedir_get =
+  _libcrash._homedir_get;
+/* global
      _msg_info */
 /* eslint-disable-next-line
      no-global-assign */
-_path_join =
+_msg_info =
   _libcrash._msg_info;
 /* global
      _path_join */
@@ -228,12 +234,66 @@ function
 }
 
 function
-  _wallet_path_get() {
+  _wallet_path_get(
+    _wallet_app,
+    _wallet_name,
+    _qr_support) {
+  let
+    _wallet_dir;
+  if ( typeof(
+         _wallet_app) == "undefined" ||
+       _wallet_app == "" ) {
+    _wallet_app =
+      "evm-wallet";
   }
+  if ( typeof(
+         _wallet_name) == "undefined" ||
+       _wallet_name == "" ) {
+    _wallet_name =
+      "default";
+  }
+  if ( typeof(
+         _qr_support) == "undefined" ||
+       _qr_support == "" ) {
+    _qr_support =
+      "n";
+  }
+  const
+    _home =
+      _homedir_get();
+  _wallet_dir =
+    _path_join( [
+      _home,
+      ".config",
+      _wallet_app ]);
+  if ( _qr_support == "y" ) {
+    _wallet_dir =
+      _path_join( [
+        _wallet_dir,
+        "qr" ]);
+  }
+  const
+    _path =
+      _path_join( [
+        _wallet_dir,
+        `${_wallet_name}.dat` ]);
+  return _path;
+}
 
 function
-  _secret_auto_detect() {
-  true;
+  _secret_auto_detect(
+    _secret,
+    _secret_type,
+    _wallet_app,
+    _wallet_name,
+    _qr_support);
+    ) {
+  if ( typeof(
+         _qr_support) == "undefined" ||
+       _qr_support == "" ) {
+    _qr_support =
+      "n";
+  }
 }
 
 function
@@ -409,7 +469,10 @@ function
   if ( _call_auth == "y" ) {
     // undefined
     _wallet_path =
-      _wallet_path_get();
+      _wallet_path_get(
+        _wallet_app,
+        _wallet_name,
+        _qr_support);
     // undefined
     _secret_auto_detect(
       "seed",
