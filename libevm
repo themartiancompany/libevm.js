@@ -281,13 +281,57 @@ function
 }
 
 function
+  _secret_path_get(
+    _secret,
+    _app,
+    _wallet_name,
+    _qr){
+  if ( _typeof(
+         _secret) == "undefined" ||
+       _secret == "" ) {
+    _secret =
+      "seed";
+  }
+  if ( _typeof(
+         _app) == "undefined" ||
+       _app == "" ) {
+    _secret =
+      "evm-wallet";
+  }
+  true;
+}
+
+function
   _secret_auto_detect(
     _secret,
     _secret_type,
     _wallet_app,
     _wallet_name,
-    _qr_support);
-    ) {
+    _qr_support) {
+  if ( typeof(
+         _secret) == "undefined" ||
+       _secret == "" ) {
+    _secret =
+      "seed";
+  }
+  if ( typeof(
+         _secret) == "undefined" ||
+       _secret == "" ) {
+    _secret_type =
+      "seed";
+  }
+  if ( typeof(
+         _wallet_app) == "undefined" ||
+       _wallet_app == "" ) {
+    _wallet_app =
+      "evm-wallet";
+  }
+  if ( typeof(
+         _wallet_name) == "undefined" ||
+       _wallet_name == "" ) {
+    _wallet_name =
+      "default";
+  }
   if ( typeof(
          _qr_support) == "undefined" ||
        _qr_support == "" ) {
@@ -432,6 +476,7 @@ function
     _call_auth,
     _qr_support) {
   let
+    _msg,
     _wallet_address,
     _wallet_seed,
     _wallet_password,
@@ -466,6 +511,11 @@ function
   }
   _wallet_address =
     "";
+  _msg =
+    "Getting defaults wallets credentials for " +
+    `app '${_wallet_app}' and wallet '${_wallet_name}'.`;
+  _msg_info(
+    _msg);
   if ( _call_auth == "y" ) {
     // undefined
     _wallet_path =
@@ -497,9 +547,8 @@ function
          "",             // _output_file
        );
     // to be turned into _msg_debug
-    const
-      _msg =
-        `Wallet address: '${_wallet_address}'`;
+    _msg =
+      `Wallet address: '${_wallet_address}'`;
     _msg_info(
       _msg);
   }

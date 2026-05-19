@@ -2,7 +2,7 @@
   "name":
     "libevm",
   "version":
-    "0.0.16",
+    "0.0.18",
   "description":
     "Library providing useful functions to write native applications interacting with EVM-compatible blockchain networks.",
   "funding": {
@@ -18,9 +18,8 @@
     "AUTHORS.rst",
     "COPYING",
     "README.md",
+    "dist",
     "libevm",
-    "libevm.js",
-    "fs-worker.js",
     "fs-worker.webpack.config.js",
     "index.html",
     "package.json",
@@ -75,11 +74,11 @@
   },
   "dependencies": {
     "crash-js":
-      "^0.1.101",
+      "^0.1.107",
     "evm-chains-info":
-      "^0.0.18",
+      "^0.0.19",
     "evm-wallet.js":
-      "^0.0.31",
+      "^0.0.35",
     "yargs":
       "18.0.0"
   },
@@ -89,7 +88,7 @@
     "libevm",
   "scripts": {
     "build-fs-worker":
-      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details",
+      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && mkdir -p 'dist' && cp fs-worker.js 'dist'",
     "build-lib":
       "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details",
     "build":
@@ -99,7 +98,7 @@
     "publish-pnm":
       "npm run build && npm publish --access public",
     "start":
-      "npx safely-serve --help # index.html --port 3000 --https --no-cache",
+      "npx safely-serve 'dist/libevm' --port 3000 --https --no-cache",
     "test":
       "echo \"Error: no test specified\" && exit 1"
   }
