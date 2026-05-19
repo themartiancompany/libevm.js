@@ -76,7 +76,7 @@
     "crash-js":
       "^0.1.107",
     "evm-chains-info":
-      "^0.0.19",
+      "^0.0.21",
     "evm-wallet.js":
       "^0.0.35",
     "yargs":
@@ -88,9 +88,9 @@
     "libevm",
   "scripts": {
     "build-fs-worker":
-      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && mkdir -p 'dist' && cp fs-worker.js 'dist'",
+      "npx webpack --mode 'production' --config 'fs-worker.webpack.config.cjs' --stats-error-details && mkdir -p 'dist' && cp 'fs-worker.js' 'dist/libevm'",
     "build-lib":
-      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details",
+      "npx webpack --mode 'production' --config 'webpack.config.cjs' --stats-error-details && mv 'libevm.js' 'dist/libevm'",
     "build":
       "npm run lint && npm run build-fs-worker && npm run build-lib",
     "lint":
