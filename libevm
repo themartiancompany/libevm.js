@@ -368,12 +368,13 @@ function
     _qr_support =
       "n";
   }
-  _secret_path =
-    _secret_path_get(
-      _secret,
-      _wallet_app,
-      _wallet_name,
-      _qr_support);
+  const
+    _secret_path =
+      _secret_path_get(
+        _secret,
+        _wallet_app,
+        _wallet_name,
+        _qr_support);
   return _secret_path;
 }
 
@@ -621,6 +622,13 @@ async function
        wallet_address == "" ) {
     wallet_address =
       _wallet_address;
+  }
+  if ( typeof(
+         wallet_seed) == "undefined" ||
+       wallet_seed == "" ||
+       wallet_seed == [] ) {
+    wallet_seed =
+      _wallet_seed;
   }
   return true;
 }
