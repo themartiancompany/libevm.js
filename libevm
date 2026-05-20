@@ -285,7 +285,9 @@ function
     _secret,
     _app,
     _wallet_name,
-    _qr){
+    _qr_support){
+  let
+    _config_dir;
   if ( typeof(
          _secret) == "undefined" ||
        _secret == "" ) {
@@ -310,12 +312,11 @@ function
     _qr_support =
       "n";
   }
-  const
-    _config_dir =
-      _path_join( [
-        _homedir_get(),
-        ".config",
-        _app ]);
+  _config_dir =
+    _path_join( [
+      _homedir_get(),
+      ".config",
+      _app ]);
   if ( _qr_support == "y" ) {
     _config_dir =
       _path_join( [
@@ -576,16 +577,6 @@ async function
         _wallet_app,
         _wallet_name,
         _qr_support);
-    console.log(
-      "hello");
-    await _address_get(
-      _wallet_seed,
-      "",             // _target_network,
-      "",             // _api_key,
-      "",             // _chain_id,
-      "",             // _chain_name,
-      "",             // _output_file
-    );
     _wallet_address = 
        await _address_get(
          _wallet_seed,
