@@ -85,13 +85,6 @@ _evm_chain_info_get =
      no-global-assign */
 _evm_chains_info =
   _evm_chains_info_module._evm_chains_info;
-const
-  _evm_wallet_module =
-    require(
-      "evm-wallet.js");
-const
-  _address_get =
-    _evm_wallet_module._address_get;
 
 function
   _libevm_global_variables() {
@@ -544,6 +537,13 @@ async function
        prefer-const  */
   _wallet_seed =
     "";
+  const
+    _evm_wallet_module =
+      require(
+        "evm-wallet.js");
+  const
+    _address_get =
+      _evm_wallet_module._address_get;
   if ( typeof(
          _wallet_app) == "undefined" ||
        _wallet_app == "" ) {
