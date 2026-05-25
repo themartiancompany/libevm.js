@@ -40,6 +40,12 @@ const
 _homedir_get =
   _libcrash._homedir_get;
 /* global
+     _msg_error */
+/* eslint-disable-next-line
+     no-global-assign */
+_msg_error =
+  _libcrash._msg_error;
+/* global
      _msg_info */
 /* eslint-disable-next-line
      no-global-assign */
@@ -73,6 +79,12 @@ _rpc_backend_get =
      no-global-assign */
 _evm_chain_info_get =
   _evm_chains_info_module._evm_chain_info_get;
+/* global
+     _evm_chains_info */
+/* eslint-disable-next-line
+     no-global-assign */
+_evm_chains_info =
+  _evm_chains_info_module._evm_chains_info;
 const
   _evm_wallet_module =
     require(
