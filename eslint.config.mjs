@@ -31,17 +31,21 @@ const
   _project =
     "libevm";
 
+const
+  _ignores = [
+   "build/**",
+   "dist/**",
+   "fs-worker.js",
+   "libevm.js",
+   "node_modules/**",
+   "eslint.config.js",
+   "man/**"
+  ];
+
 export default defineConfig([
  {
-   ignores: [
-     "build/**",
-     "dist/**",
-     "fs-worker.js",
-     "libevm.js",
-     "node_modules/**",
-     "eslint.config.js",
-     "man/**"
-   ],
+   ignores:
+     _ignores,
    rules:
      { semi:
          "error",
@@ -60,14 +64,8 @@ export default defineConfig([
          {  ...globals.browser,
             ...globals.node } } },
  { 
-   ignores: [
-     "build/**",
-     "eslint.config.js",
-     "fs-worker.js",
-     "libevm.js",
-     "node_modules/**",
-     "man/**"
-   ],
+   ignores:
+     _ignores,
    rules:
      { semi:
          "error",
