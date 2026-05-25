@@ -442,14 +442,14 @@ function
         "call-timeout"];
   }
   if ( "n" in _argv ) {
-    target_networks =
+    target_networks.push(
       _argv[
-        "n"];
+        "n"]);
   }
   if ( "network" in _argv ) {
-    target_networks =
+    target_networks.push(
       _argv[
-        "network"];
+        "network"]);
   }
 }
 
