@@ -2,7 +2,7 @@
   "name":
     "libevm",
   "version":
-    "0.0.24",
+    "0.0.25",
   "description":
     "Library providing useful functions to write native applications interacting with EVM-compatible blockchain networks.",
   "funding": {
