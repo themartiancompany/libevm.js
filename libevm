@@ -431,6 +431,16 @@ function
       _argv[
         "api-key"];
   }
+  if ( "T" in _argv ) {
+    api_key =
+      _argv[
+        "T"];
+  }
+  if ( "call-timeout" in _argv ) {
+    call_timeout =
+      _argv[
+        "call-timeout"];
+  }
   if ( "n" in _argv ) {
     target_networks.push(
       _argv[
@@ -548,11 +558,6 @@ async function
   }
   _wallet_address =
     "";
-  _msg =
-    "Getting default wallets credentials paths for " +
-    `app '${_wallet_app}' and wallet '${_wallet_name}'.`;
-  _msg_info(
-    _msg);
   if ( _call_auth == "y" ) {
     // undefined
     _wallet_path =
@@ -567,10 +572,6 @@ async function
         _wallet_app,
         _wallet_name,
         _qr_support);
-    _msg =
-      `Wallet seed: '${_wallet_seed}'`;
-    _msg_info(
-      _msg);
     _wallet_password =
       _secret_get(
         "password",
@@ -587,11 +588,6 @@ async function
          "",             // _chain_name,
          "",             // _output_file
        );
-    // to be turned into _msg_debug
-    _msg =
-      `Wallet address: '${_wallet_address}'`;
-    _msg_info(
-      _msg);
   }
   else if ( _call_auth == "n" ) {
     if ( typeof(
