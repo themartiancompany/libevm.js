@@ -629,6 +629,73 @@ async function
   return true;
 }
 
+function
+  _rpc_get(
+    _target_networks) {
+  let
+    _evm_chains_info_args,
+    _info_retrieve,
+    _msg,
+    _network,
+    _network_type;
+  const
+    _rpc =
+      {};
+  for ( _network of _target_networks ) {
+    _network_type =
+      typeof(
+        _network);
+    if ( _network_type == "string" ) {
+      if ( _network.startsWith(
+             "https://") ) {
+        _rpc[
+          _network] =
+          _network;
+        _info_retrieve =
+          "n";
+      }
+      else {
+        _info_retrieve =
+          "y";
+      }
+    }
+    else if ( _network_type == "number" ) {
+      _info_retrieve =
+        "y";
+    }
+    else {
+      _msg =
+        `Unknown type '${_network_type}' ` +
+        `for network variable.`;
+      _msg_error(
+        _msg,
+        1);
+    }
+    if ( _info_retrieve == "y" ) {
+      _evm_chains_info_args = [
+        "get",            // command
+        "id",             // input type 
+        "rpc",            // output type
+        "offline",        // retrieval method
+        [ "node",         // db types
+          "system" ],
+        "kirsh",          // selection method
+        "n",              // api key
+        "n",              // all networks
+        _network,
+        []                // db paths
+      ];
+      _rpc[
+        _network] =
+        _evm_chains_info.apply(
+          null,
+          _evm_chains_info_args)[
+            0];
+    }
+  }
+  return _rpc;
+}
+
 module.exports = {
   _contract_abi_get:
     _contract_abi_get,
@@ -652,6 +719,8 @@ module.exports = {
     _libevm_url_parse,
   _rpc_backend_get:
     _rpc_backend_get,
+  _rpc_get:
+    _rpc_get,
   _wallet_overrides_set:
     _wallet_overrides_set
 };
