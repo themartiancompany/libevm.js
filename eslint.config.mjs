@@ -35,6 +35,7 @@ export default defineConfig([
  {
    ignores: [
      "build/**",
+     "dist/**",
      "fs-worker.js",
      "libevm.js",
      "node_modules/**",
