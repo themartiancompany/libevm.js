@@ -533,11 +533,12 @@ function
         _address);
   _error =
     false;
-  if ( _address_type == "number" ) {
+  if ( _address_type == "undefined" ) {
     _msg =
       `Undefined address.`;
     _error =
       true;
+  }
   else if ( _address_type == "number" ) {
     _msg =
       `Invalid 'number' type for address.`;
