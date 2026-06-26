@@ -521,6 +521,46 @@ function
         0];
 }
 
+function
+  _address_sanity_check(
+    _address){
+  let
+    _error,
+    _msg;
+  const
+    _address_type =
+      typeof(
+        _address);
+  _error =
+    false;
+  if ( _address_type == "number" ) {
+    _msg =
+      `Undefined address.`;
+    _error =
+      true;
+  else if ( _address_type == "number" ) {
+    _msg =
+      `Invalid 'number' type for address.`;
+    _error =
+      true;
+  }
+  else if ( _address_type == "string" ) {
+    if ( ! _address.startsWith(
+             "0x") ) {
+      _msg =
+        `Malformed address '${_address}'.`;
+      _error =
+        true;
+    }
+  }
+  if ( _error ) {
+    _msg_error(
+      _msg,
+      1);
+  }
+}
+
+
 async function
   _wallet_overrides_set(
     _wallet_app,

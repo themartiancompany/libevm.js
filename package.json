@@ -2,7 +2,7 @@
   "name":
     "libevm",
   "version":
-    "0.0.26",
+    "0.0.28",
   "description":
     "Library providing useful functions to write native applications interacting with EVM-compatible blockchain networks.",
   "funding": {
@@ -30,7 +30,10 @@
     "ur",
     "themartiancompany",
     "dogeos",
-    "ethereum"
+    "ethereum",
+    "evmfs",
+    "libevm",
+    "evm-toolchain"
   ],
   "homepage":
     "https://github.com/themartiancompany/libevm.js",
@@ -56,11 +59,11 @@
   },
   "devDependencies": {
     "crash-js-webpack":
-      "^0.0.6",
+      "^0.0.31",
     "flatted":
       "^3.2.9",
     "eslint":
-      "^10.0.3",
+      "^10.3.0",
     "globals":
       "^17.3.0",
     "@eslint/js":
@@ -74,11 +77,13 @@
   },
   "dependencies": {
     "crash-js":
-      "^0.1.107",
+      "^0.11.1",
     "evm-chains-info":
       "^0.0.22",
     "evm-wallet.js":
-      "^0.0.43",
+      "^0.0.55",
+    "ws":
+      "^8.21.0",
     "yargs":
       "18.0.0"
   },
@@ -102,7 +107,7 @@
     "publish-pnm":
       "npm run build && npm publish --access public",
     "start":
-      "npx safely-serve 'dist/libevm' --port 3000 --https --no-cache",
+      "npx safely-serve 'dist/libevm'",
     "test":
       "echo \"Error: no test specified\" && exit 1"
   }
