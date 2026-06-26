@@ -94,6 +94,7 @@ module.exports = {
         _path.resolve(
           __dirname,
           'node_modules/opfs/opfs'),
+      "evm-wallet.js":
         _path.resolve(
           __dirname,
           "node_modules/evm-wallet.js/libevm-wallet"),
