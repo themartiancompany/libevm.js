@@ -102,6 +102,10 @@ module.exports = {
         _path.resolve(
           __dirname,
           "node_modules/fs/fs"),
+      "libevm":
+        _path.resolve(
+          __dirname,
+          "./libevm"),
       "path":
         _path.resolve(
           __dirname,
