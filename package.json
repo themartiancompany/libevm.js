@@ -19,12 +19,11 @@
     "COPYING",
     "README.md",
     "dist",
+    "eslint.config.mjs",
     "libevm",
-    "fs-worker.webpack.config.js",
-    "index.html",
+    "fs-worker.webpack.config.cjs",
     "package.json",
-    "serve.json",
-    "webpack.config.js"
+    "webpack.config.cjs"
   ],
   "keywords": [
     "ur",
@@ -61,7 +60,7 @@
     "brace-expansion":
       "^5.0.9",
     "crash-js-webpack":
-      "^0.0.45",
+      "^0.0.46",
     "fast-uri":
       "^4.1.2",
     "eslint":
@@ -79,11 +78,11 @@
   },
   "dependencies": {
     "crash-js":
-      "^0.1111.1111111111111111",
+      "^0.11111.1111111111111111",
     "evm-chains-info":
       "^0.0.30",
     "evm-wallet":
-      "evm-wallet.js@^0.0.72",
+      "npm:evm-wallet.js@^0.0.72",
     "ws":
       "^8.21.0",
     "yargs":
@@ -92,6 +91,8 @@
   "overrides": {
     "evm-chains-info":
       "^0.0.30",
+    "evm-wallet":
+      "npm:evm-wallet.js@^0.0.72",
     "libevm":
       "./libevm"
   },

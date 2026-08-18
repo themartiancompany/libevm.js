@@ -29,38 +29,34 @@
 
 /* eslint-disable
      no-unused-vars */
+
 const
   _libcrash =
     require(
       'crash-js');
 /* global
-     _homedir_get */
-/* eslint-disable-next-line
-     no-global-assign */
+     _homedir_get:
+       writable */
 _homedir_get =
   _libcrash._homedir_get;
 /* global
-     _msg_error */
-/* eslint-disable-next-line
-     no-global-assign */
+     _msg_error:
+       writable */
 _msg_error =
   _libcrash._msg_error;
 /* global
-     _msg_info */
-/* eslint-disable-next-line
-     no-global-assign */
+     _msg_info:
+       writable */
 _msg_info =
   _libcrash._msg_info;
 /* global
-     _path_join */
-/* eslint-disable-next-line
-     no-global-assign */
+     _path_join:
+       writable */
 _path_join =
   _libcrash._path_join;
 /* global
-     _homedir_get */
-/* eslint-disable-next-line
-     no-global-assign */
+     _require:
+       writable */
 _require =
   _libcrash._require;
 const
@@ -68,27 +64,23 @@ const
     _require(
       'evm-chains-info');
 /* global
-     _evm_chains_db_path_get */
-/* eslint-disable-next-line
-     no-global-assign */
+     _evm_chains_db_path_get:
+       writable */
 _evm_chains_db_path_get =
   _evm_chains_info_module._evm_chains_db_path_get;
 /* global
-     _rpc_backend_get */
-/* eslint-disable-next-line
-     no-global-assign */
+     _rpc_backend_get:
+       writable */
 _rpc_backend_get =
   _evm_chains_info_module._rpc_backend_get;
 /* global
-     _evm_chain_info_get */
-/* eslint-disable-next-line
-     no-global-assign */
+     _evm_chain_info_get:
+       writable */
 _evm_chain_info_get =
   _evm_chains_info_module._evm_chain_info_get;
 /* global
-     _evm_chains_info */
-/* eslint-disable-next-line
-     no-global-assign */
+     _evm_chains_info:
+       writable */
 _evm_chains_info =
   _evm_chains_info_module._evm_chains_info;
 
@@ -580,8 +572,6 @@ async function
     _wallet_seed,
     _wallet_password,
     _wallet_path;
-  /* eslint-disable
-       prefer-const  */
   _wallet_seed =
     "";
   const
