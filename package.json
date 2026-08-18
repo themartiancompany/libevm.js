@@ -2,7 +2,7 @@
   "name":
     "libevm",
   "version":
-    "0.0.32",
+    "0.0.33",
   "description":
     "Library providing useful functions to write native applications interacting with EVM-compatible blockchain networks.",
   "funding": {
@@ -58,10 +58,12 @@
       "https://github.com/tallero"
   },
   "devDependencies": {
+    "brace-expansion":
+      "^5.0.9",
     "crash-js-webpack":
-      "^0.0.41",
-    "flatted":
-      "^3.2.9",
+      "^0.0.45",
+    "fast-uri":
+      "^4.1.2",
     "eslint":
       "^10.3.0",
     "globals":
@@ -69,19 +71,19 @@
     "@eslint/js":
       "^10.0.1",
     "safely-serve":
-      "^0.0.9",
+      "^0.0.11",
     "webpack":
-      "^5.102.1",
+      "^5.109.2",
     "webpack-cli":
-      "^6.0.1"
+      "^7.2.2"
   },
   "dependencies": {
     "crash-js":
-      "^0.11.111111111111",
+      "^0.1111.1111111111111111",
     "evm-chains-info":
-      "^0.0.28",
-    "evm-wallet.js":
-      "^0.0.70",
+      "^0.0.30",
+    "evm-wallet":
+      "evm-wallet.js@^0.0.72",
     "ws":
       "^8.21.0",
     "yargs":
@@ -89,7 +91,7 @@
   },
   "overrides": {
     "evm-chains-info":
-      "^0.0.28",
+      "^0.0.30",
     "libevm":
       "./libevm"
   },

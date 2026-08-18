@@ -57,9 +57,15 @@ _msg_info =
      no-global-assign */
 _path_join =
   _libcrash._path_join;
+/* global
+     _homedir_get */
+/* eslint-disable-next-line
+     no-global-assign */
+_require =
+  _libcrash._require;
 const
   _evm_chains_info_module =
-    require(
+    _require(
       'evm-chains-info');
 /* global
      _evm_chains_db_path_get */
@@ -580,8 +586,8 @@ async function
     "";
   const
     _evm_wallet_module =
-      require(
-        "evm-wallet.js");
+      _require(
+        "evm-wallet");
   const
     _address_get =
       _evm_wallet_module._address_get;
