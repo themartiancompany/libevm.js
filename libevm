@@ -63,6 +63,8 @@ const
   _evm_chains_info_module =
     await _require(
       'evm-chains-info');
+console.log(
+  _evm_chains_info_module);
 /* global
      _evm_chains_db_path_get:
        writable */

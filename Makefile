@@ -38,6 +38,12 @@ MAN_DIR?=$(DESTDIR)$(PREFIX)/share/man
 NODE_DIR=$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)
 BUILD_NPM_DIR=build
 
+_MAKE_LINK=\
+  ln \
+    -s
+_MAKE_EXE=\
+  chmod \
+    755
 _INSTALL_FILE=\
   install \
     -vDm644
@@ -154,7 +160,6 @@ build-webpack:
 	  -r \
 	  "$(_PROJECT)" \
 	  "dist" \
-	  "lib$(_PROJECT)" \
 	  "webpack.config.cjs" \
 	  "build"
 	_webpack=( \
@@ -248,18 +253,55 @@ install-npm:
 
 install-scripts:
 
-	$(_INSTALL_DIR) \
-	  "$(LIB_DIR)/node"
-	for _file in $(NPM_FILES); do
-	  $(_INSTALL_FILE) \
-	    "$${_file}" \
-	    "$(LIB_DIR)/node/$${_file}"; \
-	done
-	ln \
-	  -s \
-	  "$(PREFIX)/lib/$(_PROJECT_NPM)/node/lib$(_PROJECT_NPM)" \
-	  "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
-	true
+	if [[ "$(_NPM)" == "false" ]]; then \
+	  cp \
+	    -r \
+	    $$(printf \
+	         "$${PWD}/%s " \
+	         $$(cat \
+	              "$${PWD}/package.json" | \
+	              jq \
+	                --raw-output \
+	                '.files[]')) \
+	    "$(LIB_DIR)/nodejs"; \
+	  if [[ ! -s "$(BIN_DIR)/$(_PROJECT)" ]]; then \
+	    $(_MAKE_EXE) \
+	      "$(LIB_DIR)/nodejs/$(_PROJECT)"; \
+	    $(_MAKE_LINK) \
+	      "$(PREFIX)/lib/$(_PROJECT)/nodejs/$(_PROJECT)" \
+	      "$(BIN_DIR)/$(_PROJECT)"; \
+	  fi; \
+	  $(_INSTALL_DIR) \
+	    "$(LIB_DIR)/nodejs"; \
+	  rm \
+	    "$(LIB_DIR)/node_modules" || \
+	    true; \
+	  if [[ ! -s "$(LIB_DIR)/node_modules" ]]; then \
+	    $(_MAKE_LINK) \
+	      "$(PREFIX)/lib/node_modules" \
+	      "$(LIB_DIR)/nodejs/node_modules"; \
+	  fi; \
+	  rm \
+	    -rf \
+	    "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)" \
+	    "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)"; \
+	  if [[ ! -s "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)" ]]; then \
+	    $(_MAKE_LINK) \
+	      "$(PREFIX)/lib/$(_PROJECT)/nodejs" \
+	      "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)"; \
+	  fi; \
+	  $(_MAKE_LINK) \
+	    "$(PREFIX)/lib/$(_PROJECT)/nodejs" \
+	    "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)" || \
+	    true; \
+	elif [[ "$(_NPM)" == "true" ]]; then \
+	  make \
+	    install-npm; \
+	  $(_MAKE_LINK) \
+	    "$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)" \
+	    "$(LIB_DIR)/nodejs" || \
+	  true; \
+	fi
 
 publish-npm:
 
