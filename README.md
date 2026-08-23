@@ -172,7 +172,9 @@ through
 https://github.com/themartiancompany/fur/tree/libevm)
 
 The package has also been published
-on the NPM Registry as `evm-chains-info`
+on the NPM Registry as
+[`evm-chains-info`](
+  https://npmjs.com/package/libevm)
 and so it can be installed from there by typing
 
 ```bash
