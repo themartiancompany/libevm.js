@@ -2,7 +2,7 @@
   "name":
     "libevm",
   "version":
-    "0.0.33",
+    "0.0.35",
   "description":
     "Library providing useful functions to write native applications interacting with EVM-compatible blockchain networks.",
   "funding": {
@@ -60,29 +60,29 @@
     "brace-expansion":
       "^5.0.9",
     "crash-js-webpack":
-      "^0.0.46",
+      "^0.0.59",
     "fast-uri":
       "^4.1.2",
     "eslint":
-      "^10.3.0",
+      "^10.9.0",
     "globals":
       "^17.3.0",
     "@eslint/js":
       "^10.0.1",
     "safely-serve":
-      "^0.0.11",
+      "^0.0.16",
     "webpack":
       "^5.109.2",
     "webpack-cli":
       "^7.2.2"
   },
   "dependencies": {
-    "crash-js":
-      "^0.11111.1111111111111111",
+    "libcrash-js":
+      "npm:crash-js@^100001.1000000000000001.1000000000000001",
     "evm-chains-info":
-      "^0.0.30",
+      "^0.0.32",
     "evm-wallet":
-      "npm:evm-wallet.js@^0.0.72",
+      "npm:evm-wallet.js@^0.0.75",
     "ws":
       "^8.21.0",
     "yargs":
@@ -90,14 +90,14 @@
   },
   "overrides": {
     "evm-chains-info":
-      "^0.0.30",
+      "^0.0.32",
     "evm-wallet":
-      "npm:evm-wallet.js@^0.0.72",
+      "npm:evm-wallet.js@^0.0.75",
     "libevm":
       "./libevm"
   },
   "type":
-    "commonjs",
+    "module",
   "main":
     "libevm",
   "scripts": {

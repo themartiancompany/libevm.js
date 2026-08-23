@@ -24,17 +24,18 @@
 #    along with this program.
 #    If not, see <https://www.gnu.org/licenses/>.
 
+_NPM ?= false
 SHELL=bash
 PREFIX ?= /usr/local
 _PROJECT_NPM=libevm
 _PROJECT=$(_PROJECT_NPM).js
 _NAMESPACE=themartiancompany
-DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT)
+DOC_DIR=$(DESTDIR)$(PREFIX)/share/doc/$(_PROJECT_NPM)
 USR_DIR=$(DESTDIR)$(PREFIX)
 BIN_DIR=$(DESTDIR)$(PREFIX)/bin
-LIB_DIR=$(DESTDIR)$(PREFIX)/lib/$(_PROJECT)
+LIB_DIR=$(DESTDIR)$(PREFIX)/lib/$(_PROJECT_NPM)
 MAN_DIR?=$(DESTDIR)$(PREFIX)/share/man
-NODE_DIR=$(PREFIX)/lib/node_modules/$(_PROJECT)
+NODE_DIR=$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)
 BUILD_NPM_DIR=build
 
 _INSTALL_FILE=\
@@ -62,35 +63,25 @@ NPM_FILES=\
   "package.json" \
   "webpack.config.cjs"
 
-all: build-man build-npm
+all: build
 
-check: eslint
+build:
 
-eslint:
-
-	npm \
-	  install \
-	  --save-dev; \
-	npx \
-	  eslint \
-	    "."
-
-install: install-scripts install-doc install-examples install-man
-
-install-scripts:
-
-	$(_INSTALL_DIR) \
-	  "$(LIB_DIR)/node"
-	for _file in $(NPM_FILES); do
-	  $(_INSTALL_FILE) \
-	    "$${_file}" \
-	    "$(LIB_DIR)/node/$${_file}"; \
-	done
-	ln \
-	  -s \
-	  "$(PREFIX)/lib/$(_PROJECT_NPM)/node/lib$(_PROJECT_NPM)" \
-	  "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
-	true
+	if [[ "$(_NPM)" == "false" ]]; then \
+	  make \
+	    build-webpack; \
+	elif [[ "$(_NPM)" == "true" ]]; then \
+	  make \
+	    build-npm; \
+	else \
+	  echo \
+	   "Invalid value for '$(_NPM)'." \
+	   1>&2; \
+	   exit \
+	     1; \
+	fi
+	make \
+	  build-man
 
 build-man:
 
@@ -157,6 +148,80 @@ build-npm:
 	  "$(_PROJECT_NPM)-$${_version}.tgz" \
 	  ".."
 
+build-webpack:
+
+	cp \
+	  -r \
+	  "$(_PROJECT)" \
+	  "dist" \
+	  "lib$(_PROJECT)" \
+	  "webpack.config.cjs" \
+	  "build"
+	_webpack=( \
+	  "$$(command \
+	        -v \
+	        "webpack")"; \
+	if [[ "${_webpack}" == "" ]]; then \
+	  _webpack=(
+	    npx
+	      webpack); \
+	fi; \
+	cd \
+	  "build"; \
+	if [[ ! -e "fs-worker.js" ]]; then \
+          "${_webpack[@]}" \
+	    --mode \
+	      'production' \
+	    --config \
+	    'fs-worker.webpack.config.cjs' \
+	    --stats-error-details; \
+	fi; \
+	cp \
+	  'fs-worker.js' \
+	  'dist/$(_PROJECT)/fs-worker.js'; \
+	cp \
+	  'fs-worker.js' \
+	  'dist/lib$(_PROJECT)/fs-worker.js'; \
+	if [[ ! -e "$(_PROJECT).js" ]]; then \
+          "${_webpack[@]}" \
+	    --mode \
+	      'production' \
+	    --config \
+	      'webpack.config.cjs' \
+	    --stats-error-details; \
+	fi; \
+	cp \
+	  "$(_PROJECT).js" \
+	  "dist/$(_PROJECT)/$(_PROJECT).js"
+
+check: eslint
+
+eslint:
+
+	npm \
+	  install \
+	  --save-dev; \
+	npx \
+	  eslint \
+	    "."
+
+install: install-scripts install-doc install-examples install-man
+
+install-doc:
+
+	$(_INSTALL_FILE) \
+	  $(DOC_FILES) \
+	  -t \
+	  $(DOC_DIR)
+
+install-man:
+
+	$(_INSTALL_DIR) \
+	  "$(MAN_DIR)/man1"
+	$(_INSTALL_FILE) \
+	  "build/man/$(_PROJECT).1" \
+	  "$(MAN_DIR)/man1/$(_PROJECT).1"
+
 install-npm:
 
 	_npm_opts=( \
@@ -177,8 +242,23 @@ install-npm:
 	  "$(DESTDIR)$(PREFIX)/lib"; \
 	ln \
 	  -s \
-	  "$(NODE_DIR)" \
+          "$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)" \
 	  "$(LIB_DIR)" || \
+	true
+
+install-scripts:
+
+	$(_INSTALL_DIR) \
+	  "$(LIB_DIR)/node"
+	for _file in $(NPM_FILES); do
+	  $(_INSTALL_FILE) \
+	    "$${_file}" \
+	    "$(LIB_DIR)/node/$${_file}"; \
+	done
+	ln \
+	  -s \
+	  "$(PREFIX)/lib/$(_PROJECT_NPM)/node/lib$(_PROJECT_NPM)" \
+	  "$(LIB_DIR)/$(_PROJECT_NPM)-js" || \
 	true
 
 publish-npm:
@@ -190,19 +270,17 @@ publish-npm:
 	  --access \
 	    "public"
 
-install-doc:
+uninstall-man:
 
-	$(_INSTALL_FILE) \
-	  $(DOC_FILES) \
-	  -t \
-	  $(DOC_DIR)
-
-install-man:
-
-	$(_INSTALL_DIR) \
-	  "$(MAN_DIR)/man1"
-	$(_INSTALL_FILE) \
-	  "build/man/$(_PROJECT).1" \
+	rm \
+	  -vf \
 	  "$(MAN_DIR)/man1/$(_PROJECT).1"
 
-.PHONY: check build-man build-npm install install-doc install-man install-npm install-scripts shellcheck
+uninstall-scripts:
+
+	rm \
+	  -vf \
+	  "$(LIB_DIR)" \
+	  "$(NODE_DIR)"
+
+.PHONY: build build-man build-npm build-webpack check install install-doc install-man install-npm install-scripts publish-npm shellcheck uninstall-man uninstall-scripts

@@ -32,8 +32,8 @@
 
 const
   _libcrash =
-    require(
-      'crash-js');
+    await import(
+      "libcrash-js");
 /* global
      _homedir_get:
        writable */
@@ -61,7 +61,7 @@ _require =
   _libcrash._require;
 const
   _evm_chains_info_module =
-    _require(
+    await _require(
       'evm-chains-info');
 /* global
      _evm_chains_db_path_get:
@@ -576,7 +576,7 @@ async function
     "";
   const
     _evm_wallet_module =
-      _require(
+      await _require(
         "evm-wallet");
   const
     _address_get =
@@ -745,31 +745,52 @@ function
   return _rpc;
 }
 
-module.exports = {
-  _contract_abi_get:
-    _contract_abi_get,
-  _contract_bytecode_get:
-    _contract_bytecode_get,
-  _contract_compiler_output_get:
-    _contract_compiler_output_get,
-  _evm_chains_db_path_get:
-    _evm_chains_db_path_get,
-  _evm_chain_info_get:
-    _evm_chain_info_get,
-  _libevm_app_cmdline_parse:
-    _libevm_app_cmdline_parse,
-  _libevm_cmdline_parse:
-    _libevm_cmdline_parse,
-  _libevm_app_global_variables:
-    _libevm_app_global_variables,
-  _libevm_global_variables:
-    _libevm_global_variables,
-  _libevm_url_parse:
-    _libevm_url_parse,
-  _rpc_backend_get:
-    _rpc_backend_get,
-  _rpc_get:
-    _rpc_get,
-  _wallet_overrides_set:
-    _wallet_overrides_set
+// ES6 module exports
+
+export {
+  _contract_abi_get,
+  _contract_bytecode_get,
+  _contract_compiler_output_get,
+  _evm_chains_db_path_get,
+  _evm_chain_info_get,
+  _libevm_app_cmdline_parse,
+  _libevm_cmdline_parse,
+  _libevm_app_global_variables,
+  _libevm_global_variables,
+  _libevm_url_parse,
+  _rpc_backend_get,
+  _rpc_get,
+  _wallet_overrides_set
 };
+
+
+// Common Javascript exports
+
+// module.exports = {
+//   _contract_abi_get:
+//     _contract_abi_get,
+//   _contract_bytecode_get:
+//     _contract_bytecode_get,
+//   _contract_compiler_output_get:
+//     _contract_compiler_output_get,
+//   _evm_chains_db_path_get:
+//     _evm_chains_db_path_get,
+//   _evm_chain_info_get:
+//     _evm_chain_info_get,
+//   _libevm_app_cmdline_parse:
+//     _libevm_app_cmdline_parse,
+//   _libevm_cmdline_parse:
+//     _libevm_cmdline_parse,
+//   _libevm_app_global_variables:
+//     _libevm_app_global_variables,
+//   _libevm_global_variables:
+//     _libevm_global_variables,
+//   _libevm_url_parse:
+//     _libevm_url_parse,
+//   _rpc_backend_get:
+//     _rpc_backend_get,
+//   _rpc_get:
+//     _rpc_get,
+//   _wallet_overrides_set:
+//     _wallet_overrides_set
+// };

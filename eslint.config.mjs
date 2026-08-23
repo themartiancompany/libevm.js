@@ -35,11 +35,13 @@ const
   _ignores = [
    "build/**",
    "dist/**",
-   "fs-worker.js",
-   "libevm.js",
-   "node_modules/**",
    "eslint.config.js",
-   "man/**"
+   "fs-worker.js",
+   "**/*.fs-worker.js",
+   `${_project}.js`,
+   `**/*.${_project}.js`,
+   "man/**",
+   "node_modules/**"
   ];
 
 export default defineConfig([
@@ -72,8 +74,7 @@ export default defineConfig([
        "prefer-const":
          "error" },
    files:
-     [ "**/*.js",
-       `**/${_project}*`
+     [ "**/*.{cjs,js}",
      ],
    languageOptions:
      { sourceType:
