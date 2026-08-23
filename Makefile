@@ -40,7 +40,7 @@ BUILD_NPM_DIR=build
 
 _MAKE_LINK=\
   ln \
-    -s
+    -vs
 _MAKE_EXE=\
   chmod \
     755
@@ -245,8 +245,7 @@ install-npm:
 	    "$(_PROJECT_NPM)-$${_version}.tgz"; \
 	$(_INSTALL_DIR) \
 	  "$(DESTDIR)$(PREFIX)/lib"; \
-	ln \
-	  -s \
+	$(_MAKE_LINK) \
           "$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)" \
 	  "$(LIB_DIR)" || \
 	true
@@ -264,13 +263,6 @@ install-scripts:
 	                --raw-output \
 	                '.files[]')) \
 	    "$(LIB_DIR)/nodejs"; \
-	  if [[ ! -s "$(BIN_DIR)/$(_PROJECT)" ]]; then \
-	    $(_MAKE_EXE) \
-	      "$(LIB_DIR)/nodejs/$(_PROJECT)"; \
-	    $(_MAKE_LINK) \
-	      "$(PREFIX)/lib/$(_PROJECT)/nodejs/$(_PROJECT)" \
-	      "$(BIN_DIR)/$(_PROJECT)"; \
-	  fi; \
 	  $(_INSTALL_DIR) \
 	    "$(LIB_DIR)/nodejs"; \
 	  rm \
@@ -282,18 +274,24 @@ install-scripts:
 	      "$(LIB_DIR)/nodejs/node_modules"; \
 	  fi; \
 	  rm \
-	    -rf \
+	    -vrf \
 	    "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)" \
 	    "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)"; \
-	  if [[ ! -s "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)" ]]; then \
+	  if [[ ! -s "$(NODE_DIR)" ]]; then \
 	    $(_MAKE_LINK) \
-	      "$(PREFIX)/lib/$(_PROJECT)/nodejs" \
-	      "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT_NPM)"; \
+	      "$(PREFIX)/lib/$(_PROJECT_NPM)/nodejs" \
+	      "$(NODE_DIR)"; \
 	  fi; \
-	  $(_MAKE_LINK) \
-	    "$(PREFIX)/lib/$(_PROJECT)/nodejs" \
-	    "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)" || \
-	    true; \
+	  if [[ ! -s "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)" ]]; then \
+	    $(_MAKE_LINK) \
+	      "$(PREFIX)/lib/$(_PROJECT_NPM)/nodejs" \
+	      "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)"; \
+	  fi; \
+	  if [[ ! -s "$(LIB_DIR)/$(_PROJECT_NPM)-js" ]]; then \
+	    $(_MAKE_LINK) \
+	      "$(PREFIX)/lib/$(_PROJECT_NPM)/nodejs/$(_PROJECT_NPM)" \
+	      "$(LIB_DIR)/$(_PROJECT_NPM)-js"; \
+	  fi; \
 	elif [[ "$(_NPM)" == "true" ]]; then \
 	  make \
 	    install-npm; \
@@ -323,6 +321,7 @@ uninstall-scripts:
 	rm \
 	  -vf \
 	  "$(LIB_DIR)" \
-	  "$(NODE_DIR)"
+	  "$(NODE_DIR)" \
+	  "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)"
 
 .PHONY: build build-man build-npm build-webpack check install install-doc install-man install-npm install-scripts publish-npm shellcheck uninstall-man uninstall-scripts
