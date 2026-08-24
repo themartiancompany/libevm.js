@@ -37,54 +37,61 @@ const
 /* global
      _homedir_get:
        writable */
-_homedir_get =
-  _libcrash._homedir_get;
+const
+  _homedir_get =
+    _libcrash._homedir_get;
 /* global
      _msg_error:
        writable */
-_msg_error =
-  _libcrash._msg_error;
+const
+  _msg_error =
+    _libcrash._msg_error;
 /* global
      _msg_info:
        writable */
-_msg_info =
-  _libcrash._msg_info;
+const
+  _msg_info =
+    _libcrash._msg_info;
 /* global
      _path_join:
        writable */
-_path_join =
-  _libcrash._path_join;
+const
+  _path_join =
+    _libcrash._path_join;
 /* global
      _require:
        writable */
-_require =
-  _libcrash._require;
+const
+  _require =
+    _libcrash._require;
 const
   _evm_chains_info_module =
     await _require(
       'evm-chains-info');
-console.log(
-  _evm_chains_info_module);
 /* global
      _evm_chains_db_path_get:
        writable */
-_evm_chains_db_path_get =
-  _evm_chains_info_module._evm_chains_db_path_get;
+const
+  _evm_chains_db_path_get =
+    _evm_chains_info_module._evm_chains_db_path_get;
 /* global
      _rpc_backend_get:
        writable */
-_rpc_backend_get =
-  _evm_chains_info_module._rpc_backend_get;
+const
+  _rpc_backend_get =
+    _evm_chains_info_module._rpc_backend_get;
 /* global
      _evm_chain_info_get:
        writable */
-_evm_chain_info_get =
-  _evm_chains_info_module._evm_chain_info_get;
+const
+  _evm_chain_info_get =
+    _evm_chains_info_module._evm_chain_info_get;
 /* global
      _evm_chains_info:
        writable */
-_evm_chains_info =
-  _evm_chains_info_module._evm_chains_info;
+const
+  _evm_chains_info =
+    _evm_chains_info_module._evm_chains_info;
 
 function
   _libevm_global_variables() {
