@@ -64,6 +64,12 @@ const
 const
   _require =
     _libcrash._require;
+/* global
+     _set:
+       writable */
+const
+  _set =
+    _libcrash._set;
 const
   _evm_chains_info_module =
     await _require(
@@ -98,73 +104,101 @@ function
   /* global
        call_auth:
          writable */
-  call_auth =
-    "";
+  _set(
+    "call",
+    "auth",
+    "");
   /* global
        wallet_name:
          writable */
-  wallet_name =
-    "";
+  _set(
+    "wallet",
+    "name",
+    "");
   /* global
        wallet_path:
          writable */
-  wallet_path =
-    "";
+  _set(
+    "wallet",
+    "path",
+    "");
   /* global
        wallet_password:
          writable */
-  wallet_password =
-    "";
+  _set(
+    "wallet",
+    "password",
+    "");
   /* global
        wallet_address:
          writable */
-  wallet_address =
-    "";
+  _set(
+    "wallet",
+    "address",
+    "");
   /* global
        wallet_seed:
          writable */
-  wallet_seed =
-    "";
+  _set(
+    "wallet",
+    "seed",
+    "");
   /* global
        api_key:
          writable */
-  api_key =
-    "";
+  _set(
+    "api",
+    "key",
+    "");
   /* global
        networks_amount:
          writable */
-  networks_amount =
-    "";
+  _set(
+    "networks",
+    "amount",
+    "");
   /* global
        target_network:
          writable */
-  target_network =
-    "";
+  _set(
+    "target",
+    "network",
+    "");
   /* global
        target_networks:
          writable */
-  target_networks =
-    [];
+  _set(
+    "target",
+    "networks",
+    []);
   /* global
        rpc_selection:
          writable */
-  rpc_selection =
-    "";
+  _set(
+    "rpc",
+    "selection",
+    "");
   /* global
        retries_max:
          writable */
-  retries_max =
-    "";
+  _set(
+    "retries",
+    "max",
+    "");
   /* global
        call_timeout:
          writable */
-  call_timeout =
-    "";
+  _set(
+    "call",
+    "timeout",
+    "");
   /* global
        msg_value:
          writable */
-  msg_value =
-    "";
+  _set(
+    "msg",
+    "value",
+    "");
 }
 
 function
