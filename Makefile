@@ -253,6 +253,8 @@ install-npm:
 install-scripts:
 
 	if [[ "$(_NPM)" == "false" ]]; then \
+	  $(_INSTALL_DIR) \
+	    "$(LIB_DIR)/nodejs"; \
 	  cp \
 	    -r \
 	    $$(printf \
@@ -262,8 +264,6 @@ install-scripts:
 	              jq \
 	                --raw-output \
 	                '.files[]')) \
-	    "$(LIB_DIR)/nodejs"; \
-	  $(_INSTALL_DIR) \
 	    "$(LIB_DIR)/nodejs"; \
 	  rm \
 	    "$(LIB_DIR)/node_modules" || \
@@ -319,7 +319,7 @@ uninstall-man:
 uninstall-scripts:
 
 	rm \
-	  -vf \
+	  -rvf \
 	  "$(LIB_DIR)" \
 	  "$(NODE_DIR)" \
 	  "$(DESTDIR)$(PREFIX)/lib/node_modules/$(_PROJECT)"
