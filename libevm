@@ -237,79 +237,6 @@ function
     "");
 }
 
-async function
-  _app_lookup_contract(
-    _contract_name) {
-  let
-    _app,
-    _contract_dir,
-    _msg;
-  const
-    _lib =
-      await _lib_get();
-  const
-    _target_apps =
-      {};
-  const
-    _apps =
-      await _ls(
-      _lib);
-  for ( _app of _apps ) {
-    _contract_dir =
-      _path_join([
-        _lib,
-        _app,
-        "deployments",
-        _contract_name
-      ]);
-    if ( _dir_exists(
-           _contract_dir) ) {
-      _target_apps[
-        _app] =
-        1;
-    }
-  }
-  const
-    _target_apps_set =
-      Object.keys(
-        _target_apps);
-  const
-    _target_apps_amount =
-      _target_apps_set.length;
-  if ( _target_apps_amount < 1 ) {
-    _msg =
-      "No apps found for " +
-      `contract '${_contract_name}' ` +
-      `in '${_lib}'.`;
-    _msg_error(
-      _msg,
-      0);
-    const
-      _exception = {
-        "msg":
-          _msg
-      };
-    throw _exception;
-  }
-  else if ( 1 < _target_apps_amount ) {
-    _msg =
-      "Found more than one app for " +
-      `contract '${_contract_name}' ` +
-      `in '${_lib}': '${_target_apps_set}'.`;
-    _msg_error(
-      _msg,
-      0);
-    const
-      _exception = {
-        "msg":
-          _msg
-      };
-    throw _exception;
-  }
-  return _target_apps_set[
-    0];
-}
-
 function
   _contract_abi_get(
     _deployments_dir,
@@ -886,6 +813,7 @@ function
 // ES6 module exports
 
 export {
+  _app_lookup_contract,
   _contract_abi_get,
   _contract_bytecode_get,
   _contract_compiler_output_get,
@@ -905,6 +833,8 @@ export {
 // Common Javascript exports
 
 // module.exports = {
+//   _app_lookup_contract:
+//     _app_lookup_contract,
 //   _contract_abi_get:
 //     _contract_abi_get,
 //   _contract_bytecode_get:
