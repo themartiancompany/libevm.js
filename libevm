@@ -35,11 +35,29 @@ const
     await import(
       "libcrash-js");
 /* global
+     _dir_exists:
+       writable */
+const
+  _dir_exists =
+    _libcrash._dir_exists;
+/* global
      _homedir_get:
        writable */
 const
   _homedir_get =
     _libcrash._homedir_get;
+/* global
+     _lib_get:
+       writable */
+const
+  _lib_get =
+    _libcrash._lib_get;
+/* global
+     _ls:
+       writable */
+const
+  _ls =
+    _libcrash._ls;
 /* global
      _msg_error:
        writable */
@@ -206,13 +224,90 @@ function
   /* global
        deployments_dir:
          writable */
-  deployments_dir =
-    "";
+  _set(
+    "deployments",
+    "dir",
+    "");
   /* global
        user_level:
          writable */
-  user_level =
-    "";
+  _set(
+    "user",
+    "level",
+    "");
+}
+
+async function
+  _app_lookup_contract(
+    _contract_name) {
+  let
+    _app,
+    _contract_dir,
+    _msg;
+  const
+    _lib =
+      await _lib_get();
+  const
+    _target_apps =
+      {};
+  const
+    _apps =
+      await _ls(
+      _lib);
+  for ( _app of _apps ) {
+    _contract_dir =
+      _path_join([
+        _lib,
+        _app,
+        "deployments",
+        _contract_name
+      ]);
+    if ( _dir_exists(
+           _contract_dir) ) {
+      _target_apps[
+        _app] =
+        1;
+    }
+  }
+  const
+    _target_apps_set =
+      Object.keys(
+        _target_apps);
+  const
+    _target_apps_amount =
+      _target_apps_set.length;
+  if ( _target_apps_amount < 1 ) {
+    _msg =
+      "No apps found for " +
+      `contract '${_contract_name}' ` +
+      `in '${_lib}'.`;
+    _msg_error(
+      _msg,
+      0);
+    const
+      _exception = {
+        "msg":
+          _msg
+      };
+    throw _exception;
+  }
+  else if ( 1 < _target_apps_amount ) {
+    _msg =
+      "Found more than one app for " +
+      `contract '${_contract_name}' ` +
+      `in '${_lib}': '${_target_apps_set}'.`;
+    _msg_error(
+      _msg,
+      0);
+    const
+      _exception = {
+        "msg":
+          _msg
+      };
+    throw _exception;
+  }
+  return _target_apps_set[
+    0];
 }
 
 function
