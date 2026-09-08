@@ -813,7 +813,6 @@ function
 // ES6 module exports
 
 export {
-  _app_lookup_contract,
   _contract_abi_get,
   _contract_bytecode_get,
   _contract_compiler_output_get,
@@ -833,8 +832,6 @@ export {
 // Common Javascript exports
 
 // module.exports = {
-//   _app_lookup_contract:
-//     _app_lookup_contract,
 //   _contract_abi_get:
 //     _contract_abi_get,
 //   _contract_bytecode_get:
