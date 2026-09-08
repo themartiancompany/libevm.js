@@ -739,7 +739,7 @@ async function
       _rpcs =
         await _rpc_get(
           _target_networks);
-      _target_network =
+      _network_rpcs =
         _rpcs[
           _target_network];
       _echo(
@@ -818,13 +818,18 @@ async function
     _info_retrieve,
     _msg,
     _network,
-    _network_type;
+    _network_type,
+    _rpc,
+    _rpc_results;
   const
     _global =
       _global_get();
   const
-    _rpc =
-      {};
+    _quiet =
+      _global[
+        "quiet"];
+  _rpc =
+    {};
   _msg =
     `Getting RPCs for networks ` +
     `'${_target_networks}'.`;
@@ -837,9 +842,12 @@ async function
     if ( _network_type == "string" ) {
       if ( _network.startsWith(
              "https://") ) {
-        _rpc[
+        _rpc_results[
           _network] =
-          _network;
+            [];
+        _rpc_results[
+          _network].push(
+            _network);
         _info_retrieve =
           "n";
       }
@@ -880,29 +888,28 @@ async function
         `with arguments:`;
       _msg_info(
         _msg);
-      const
-        _quiet =
-          _global[
-            "quiet"];
       if ( _quiet != "y" ) {
         _echo(
           _evm_chains_info_args);
       }
-      const
-        _rpc_results[
-          _network] =
-          await _evm_chains_info.apply(
-            null,
-            _evm_chains_info_args);
+      _rpc_results[
+        _network] =
+        await _evm_chains_info.apply(
+          null,
+          _evm_chains_info_args);
       _rpc =
         _rpc_results[
           0];
     }
   }
   _msg =
-    `Obtained RPCs\n'${_rpc}'.`;
+    `Obtained RPCs`;
   _msg_info(
     _msg);
+  if ( _quiet != "y" ) {
+    _echo(
+      _rpc_results);
+  }
   return _rpc;
 }
 
