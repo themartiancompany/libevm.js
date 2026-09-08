@@ -41,6 +41,18 @@ const
   _dir_exists =
     _libcrash._dir_exists;
 /* global
+     _echo:
+       writable */
+const
+  _echo =
+    _libcrash._echo;
+/* global
+     _global_get:
+       writable */
+const
+  _global_get =
+    _libcrash._global_get;
+/* global
      _homedir_get:
        writable */
 const
@@ -630,15 +642,21 @@ async function
     _wallet_app,
     _wallet_name,
     _call_auth,
-    _qr_support) {
+    _qr_support,
+    _target_networks) {
   let
     _msg,
+    _rpcs,
+    _target_network,
     _wallet_address,
     _wallet_seed,
     _wallet_password,
     _wallet_path;
   _wallet_seed =
     "";
+  const
+    _global =
+      _global_get();
   const
     _evm_wallet_module =
       await _require(
@@ -670,6 +688,13 @@ async function
       _qr_support =
         "n";
   }
+  if ( typeof(
+         _target_networks) == "undefined" ||
+       _target_networks == "" ) {
+      _target_networks = [
+        1
+      ];
+  }
   _wallet_address =
     "";
   if ( _call_auth == "y" ) {
@@ -693,10 +718,52 @@ async function
         _wallet_app,
         _wallet_name,
         _qr_support);
+    _target_network =
+      _target_networks[
+        0];
+    const
+      _target_network_starts_with =
+        _target_network.startsWith;
+    const
+      _target_network_starts_with_type =
+        typeof(
+          _target_network_starts_with);
+    const
+      _target_network_type =
+        typeof(
+          _target_network);
+    if ( _target_network_starts_with_type == "undefined" ||
+         _target_network_type == "number" ||
+         _target_network_type == "bigint" ) {
+      console.error(_target_networks)
+      _rpcs =
+        await _rpc_get(
+          _target_networks);
+      _target_network =
+        _rpcs[
+          _target_network];
+      _echo(
+        _target_network);
+    }
+    else if ( _target_network_type == "string" ) {
+      if ( ! _target_network.startsWith(
+               "https://") &&
+           ! _target_networks.startsWith(
+	       "wss://") ) {
+        _rpcs =
+          await _rpc_get(
+            _target_networks);
+        _target_network =
+          _rpcs[
+            _target_network];
+        _msg_info(
+          _rpcs);
+      }
+    }
     _wallet_address = 
        await _address_get(
          _wallet_seed,
-         "",             // _target_network,
+         _target_network,
          "",             // _api_key,
          "",             // _chain_id,
          "",             // _chain_name,
@@ -743,7 +810,7 @@ async function
   return true;
 }
 
-function
+async function
   _rpc_get(
     _target_networks) {
   let
@@ -801,7 +868,7 @@ function
       ];
       _rpc[
         _network] =
-        _evm_chains_info.apply(
+        await _evm_chains_info.apply(
           null,
           _evm_chains_info_args)[
             0];
