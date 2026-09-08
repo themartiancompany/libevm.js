@@ -822,6 +822,11 @@ async function
   const
     _rpc =
       {};
+  _msg =
+    `Getting RPCs for networks ` +
+    `'${_target_networks}'.`;
+  _msg_info(
+    _msg);
   for ( _network of _target_networks ) {
     _network_type =
       typeof(
@@ -866,6 +871,11 @@ async function
         _network,
         []                // db paths
       ];
+      _msg =
+        "Running '_evm_chains_info' " +
+        `with arguments '${_evm_chains_info_args}'.`;
+      _msg_info(
+        _msg);
       _rpc[
         _network] =
         await _evm_chains_info.apply(
