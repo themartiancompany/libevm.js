@@ -820,6 +820,9 @@ async function
     _network,
     _network_type;
   const
+    _global =
+      _global_get();
+  const
     _rpc =
       {};
   _msg =
@@ -869,21 +872,37 @@ async function
         "n",              // api key
         "n",              // all networks
         _network,
-        []                // db paths
+        [],               // db paths
+        "n"
       ];
       _msg =
         "Running '_evm_chains_info' " +
-        `with arguments '${_evm_chains_info_args}'.`;
+        `with arguments:`;
       _msg_info(
         _msg);
-      _rpc[
-        _network] =
-        await _evm_chains_info.apply(
-          null,
-          _evm_chains_info_args)[
-            0];
+      const
+        _quiet =
+          _global[
+            "quiet"];
+      if ( _quiet != "y" ) {
+        _echo(
+          _evm_chains_info_args);
+      }
+      const
+        _rpc_results[
+          _network] =
+          await _evm_chains_info.apply(
+            null,
+            _evm_chains_info_args);
+      _rpc =
+        _rpc_results[
+          0];
     }
   }
+  _msg =
+    `Obtained RPCs\n'${_rpc}'.`;
+  _msg_info(
+    _msg);
   return _rpc;
 }
 
