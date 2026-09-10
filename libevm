@@ -652,6 +652,11 @@ async function
     _wallet_seed,
     _wallet_password,
     _wallet_path;
+  _msg =
+    "Wallet credentials override " +
+    "function.";
+  _msg_info(
+    _msg);
   _wallet_seed =
     "";
   const
@@ -735,11 +740,10 @@ async function
     if ( _target_network_starts_with_type == "undefined" ||
          _target_network_type == "number" ||
          _target_network_type == "bigint" ) {
-      console.error(_target_networks)
       _rpcs =
         await _rpc_get(
           _target_networks);
-      _network_rpcs =
+      _rpc_results =
         _rpcs[
           _target_network];
       _echo(
@@ -748,8 +752,8 @@ async function
     else if ( _target_network_type == "string" ) {
       if ( ! _target_network.startsWith(
                "https://") &&
-           ! _target_networks.startsWith(
-	       "wss://") ) {
+           ! _target_network.startsWith(
+               "wss://") ) {
         _rpcs =
           await _rpc_get(
             _target_networks);
@@ -828,6 +832,8 @@ async function
     _quiet =
       _global[
         "quiet"];
+  _rpc_results =
+    {}
   _rpc =
     {};
   _msg =
@@ -910,7 +916,7 @@ async function
     _echo(
       _rpc_results);
   }
-  return _rpc;
+  return _rpc_results;
 }
 
 // ES6 module exports
