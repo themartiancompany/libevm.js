@@ -646,6 +646,7 @@ async function
     _target_networks) {
   let
     _msg,
+    _rpc_results,
     _rpcs,
     _target_network,
     _wallet_address,
@@ -746,7 +747,7 @@ async function
       _rpc_results =
         _rpcs[
           _target_network];
-      _echo(
+      _msg_info(
         _target_network);
     }
     else if ( _target_network_type == "string" ) {
