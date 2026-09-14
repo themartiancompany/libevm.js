@@ -705,6 +705,10 @@ async function
     "";
   if ( _call_auth == "y" ) {
     // undefined
+    _msg =
+      "Enabled call authentication.";
+    _msg_info(
+      _msg);
     _wallet_path =
       _wallet_path_get(
         _wallet_app,
@@ -824,8 +828,7 @@ async function
     _msg,
     _network,
     _network_type,
-    _rpc,
-    _rpc_results;
+    _rpc;
   const
     _global =
       _global_get();
@@ -833,8 +836,9 @@ async function
     _quiet =
       _global[
         "quiet"];
-  _rpc_results =
-    {}
+  const
+    _rpc_results =
+      {};
   _rpc =
     {};
   _msg =
