@@ -82,7 +82,7 @@
     "evm-chains-info":
       "^0.0.37",
     "evm-wallet":
-      "npm:evm-wallet.js@^0.0.96",
+      "npm:evm-wallet.js@^0.0.99",
     "ws":
       "^8.21.0",
     "yargs":
@@ -92,7 +92,7 @@
     "evm-chains-info":
       "^0.0.37",
     "evm-wallet":
-      "npm:evm-wallet.js@^0.0.96",
+      "npm:evm-wallet.js@^0.0.99",
     "libevm":
       "./libevm"
   },
