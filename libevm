@@ -845,6 +845,7 @@ async function
   let
     _msg,
     _target_network_get,
+    _target_network_not_number,
     _target_network_starts_with,
     _target_network_type,
     _rpcs;
