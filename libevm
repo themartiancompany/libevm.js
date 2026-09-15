@@ -479,7 +479,7 @@ function
            _qr_support !== "y" ) {
       _msg =
         "Quantum Resistance '_qr_support' " +
-        "variable can only be 'y' or 'n', "
+        "variable can only be 'y' or 'n', " +
         `(current value '${_qr_support}').`;
       _msg_error(
         _msg,
@@ -523,7 +523,6 @@ function
     _wallet_name,
     _qr_support) {
   let
-    _msg,
     _wallet_app_get,
     _wallet_dir,
     _wallet_name_get;
@@ -555,9 +554,10 @@ function
       _path_join( [
         _wallet_dir,
         `${_wallet_name}.dat` ]);
-  _msg =
-    "Wallet path is " +
-    `'${_path}'`;
+  const
+    _msg =
+      "Wallet path is " +
+      `'${_path}'`;
   _msg_info(
     _msg);
   return _path;
@@ -1054,6 +1054,8 @@ async function
       _msg =
         "Wallet address not specified, " +
         "determining.";
+      _msg_info(
+        _msg);
       _address_derive =
         true;
     }
