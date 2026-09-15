@@ -517,6 +517,7 @@ function
     _wallet_name,
     _qr_support) {
   let
+    _msg,
     _wallet_app_get,
     _wallet_dir,
     _wallet_name_get;
