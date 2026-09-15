@@ -53,6 +53,12 @@ const
   _echo2 =
     _libcrash._echo2;
 /* global
+     _get:
+       writable */
+const
+  _get =
+    _libcrash._get;
+/* global
      _global_get:
        writable */
 const
@@ -856,6 +862,17 @@ async function
     _target_network_get =
       true;
   }
+  else if ( _target_network_type === "number" ||
+            _target_network_type === "bigint" ) {
+    _msg =
+      "Target network " +
+      `'${_target_network}' is a ` +
+      "Chain ID.";
+    _msg_info(
+      _msg);
+    _target_network_get =
+      true;
+  }
   else if ( _target_network_type === "string" ) {
     if ( _target_network.length < 1 ) {
       _msg =
@@ -907,7 +924,7 @@ async function
   else {
     _msg =
       "Unknown type " +
-      `'${_target_network}' ` +
+      `'${_target_network_type}' ` +
       "for variable '_target_network'.";
     _msg_error(
       _msg);
