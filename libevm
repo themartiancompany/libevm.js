@@ -978,7 +978,8 @@ async function
     _chain_name,
     _output_file) {
   let
-    _address_derive;
+    _address_derive,
+    _msg;
   const
     _address_type =
       typeof(
@@ -1020,6 +1021,13 @@ async function
     _echo2(
       _address);
   }
+  const
+    _evm_wallet_module =
+      await _require(
+        "evm-wallet");
+  const
+    _address_get =
+      _evm_wallet_module._address_get;
   if ( _address_derive ) {
     const
       _address_get_args = [
@@ -1080,13 +1088,6 @@ async function
   const
     _global =
       _global_get();
-  const
-    _evm_wallet_module =
-      await _require(
-        "evm-wallet");
-  const
-    _address_get =
-      _evm_wallet_module._address_get;
   if ( typeof(
          _wallet_app) == "undefined" ||
        _wallet_app == "" ) {
