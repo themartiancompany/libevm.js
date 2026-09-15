@@ -846,11 +846,11 @@ async function
     _msg,
     _target_network_get,
     _target_network_starts_with,
+    _target_network_type,
     _rpcs;
-  const
-    _target_network_type =
-      typeof(
-        _target_network);
+  _target_network_type =
+    typeof(
+      _target_network);
   _target_network_get =
     false;
   if ( _target_network_type === "undefined" ) {
@@ -964,6 +964,59 @@ async function
         _target_network];
     _msg_info(
       _rpcs);
+    _target_network_type =
+      typeof(
+        _target_network);
+    if ( _target_network_type === "array" ) {
+      _msg =
+        "Retrieved target network " +
+        "is an array, fixing.";
+      _msg_info(
+        _msg);
+      _target_network =
+        _target_network[
+        0];
+    }
+    else if ( _target_network_type === "object" ) {
+      if ( 0 in _target_network ) {
+        _msg =
+          "Retrieved target network " +
+          "is an object, fixing.";
+        _msg_info(
+          _msg);
+        _target_network =
+          _target_network[
+          0];
+      }
+      else {
+        _msg =
+          "Unknown object type for target network:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _target_network);
+        throw _msg;
+      }
+    }
+    else if ( _target_network_type === "string" ) {
+      _msg =
+        `Target network is '${_target_network}'`;
+      _msg_info(
+        _msg);
+    }
+    else {
+      _msg =
+        "Unknown object type " +
+        `'${_target_network_type}' ` +
+        `for target network:`;
+      _msg_error(
+        _msg,
+        0);
+      _echo2(
+        _target_network);
+      throw _msg;
+    }
   }
   return _target_network;
 }
@@ -1029,6 +1082,25 @@ async function
     _address_get =
       _evm_wallet_module._address_get;
   if ( _address_derive ) {
+    try {
+      _target_network =
+        await _target_network_check(
+          _target_network);
+    }
+    catch(
+      _error) {
+      _msg =
+        "Error running '_target_network_check' " +
+        "with parameters:";
+      _msg_error(
+        _msg,
+        0);
+      _echo2(
+        _target_network);
+      _echo2(
+        _error);
+      throw _error;
+    }
     const
       _address_get_args = [
         _wallet_seed,
@@ -1157,7 +1229,7 @@ async function
     catch(
       _error) {
       _msg =
-        "Error running '_target_network_check'" +
+        "Error running '_target_network_check' " +
         "with parameters:";
       _msg_error(
         _msg,
