@@ -323,6 +323,7 @@ function
   _wallet_app_check(
     _wallet_app) {
   let
+    _msg,
     _wallet_app_get;
   const
     _wallet_app_type =
@@ -380,6 +381,9 @@ function
 function
   _wallet_name_check(
     _wallet_name) {
+  let
+    _msg,
+    _wallet_name_get;
   const
     _wallet_name_type =
       typeof(
@@ -436,6 +440,9 @@ function
 function
   _qr_support_check(
     _qr_support) {
+  let
+    _msg,
+    _qr_support_get;
   const
     _qr_support_type =
       typeof(
@@ -829,6 +836,7 @@ async function
   _target_network_check(
     _target_network) {
   let
+    _msg,
     _target_network_get,
     _target_network_starts_with,
     _rpcs;
