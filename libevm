@@ -47,6 +47,12 @@ const
   _echo =
     _libcrash._echo;
 /* global
+     _echo2:
+       writable */
+const
+  _echo2 =
+    _libcrash._echo2;
+/* global
      _global_get:
        writable */
 const
@@ -314,30 +320,208 @@ function
 }
 
 function
+  _wallet_app_check(
+    _wallet_app) {
+  let
+    _wallet_app_get;
+  const
+    _wallet_app_type =
+      typeof(
+        _wallet_app);
+  _wallet_app_get =
+    false;
+  if ( _wallet_app_type === "undefined" ) {
+    _msg =
+      "Wallet application undefined, auto-detecting.";
+    _msg_info(
+      _msg);
+    _wallet_app_get =
+      true;
+  }
+  else if ( _wallet_app_type === "string" ) {
+    if (_wallet_app.length < 1 ) {
+      _msg =
+        "Wallet application not set, auto-detecting.";
+      _msg_info(
+        _msg);
+      _wallet_app_get =
+        true;
+    }
+    else {
+      _msg =
+        "Wallet application is " +
+        `'${_wallet_app}'.`;
+      _msg_info(
+        _msg);
+    }
+  }
+  else {
+    _msg =
+      "Unknown type " +
+      `'${_wallet_app_type}' for ` +
+      `variable '_wallet_app':`;
+    _msg_error(
+      _msg,
+      0);
+    throw _msg;
+  }
+  if ( _wallet_app_get ) {
+    _wallet_app =
+      "evm-wallet";
+    _msg =
+      "Set wallet application " +
+      `'${_wallet_app}'.`;
+    _msg_info(
+      _msg);
+  }
+  return _wallet_app;
+}
+
+function
+  _wallet_name_check(
+    _wallet_name) {
+  const
+    _wallet_name_type =
+      typeof(
+        _wallet_name);
+  _wallet_name_get =
+    false;
+  if ( _wallet_name_type === "undefined" ) {
+    _msg =
+      "Wallet name undefined, auto-detecting.";
+    _msg_info(
+      _msg);
+    _wallet_name_get =
+      true;
+  }
+  else if ( _wallet_name_type === "string" ) {
+    if (_wallet_name.length < 1 ) {
+      _msg =
+        "Wallet name not set, auto-detecting.";
+      _msg_info(
+        _msg);
+      _wallet_name_get =
+        true;
+    }
+    else {
+      _msg =
+        "Wallet name is " +
+        `'${_wallet_name}'.`;
+      _msg_info(
+        _msg);
+    }
+  }
+  else {
+    _msg =
+      "Unknown type " +
+      `'${_wallet_name_type}' for ` +
+      `variable '_wallet_name':`;
+    _msg_error(
+      _msg,
+      0);
+    throw _msg;
+  }
+  if ( _wallet_name_get ) {
+    _wallet_name =
+      "default";
+    _msg =
+      "Set wallet name " +
+      `'${_wallet_name}'.`;
+    _msg_info(
+      _msg);
+  }
+  return _wallet_name;
+}
+
+function
+  _qr_support_check(
+    _qr_support) {
+  const
+    _qr_support_type =
+      typeof(
+        _qr_support);
+  _qr_support_get =
+    false;
+  if ( _qr_support_type === "undefined" ) {
+    _msg =
+      "Quantum Resistance support undefined, " +
+      "auto-detecting.";
+    _msg_info(
+      _msg);
+    _qr_support_get =
+      true;
+  }
+  else if ( _qr_support_type === "string" ) {
+    if (_qr_support.length < 1 ) {
+      _msg =
+        "Quantum Resistance support not set, " +
+        "auto-detecting.";
+      _msg_info(
+        _msg);
+      _qr_support_get =
+        true;
+    }
+    else {
+      if ( _qr_support !== "n" &&
+           _qr_support !== "y" ) {
+      _msg =
+        "Quantum Resistance '_qr_support' " +
+        "variable can only be 'y' or 'n', "
+        `(current value '${_qr_support}').`;
+      _msg_error(
+        _msg,
+        0);
+      throw _msg;
+      }
+      else {
+        _msg =
+          "Quantum support is " +
+          `'${_qr_support}'.`;
+        _msg_info(
+          _msg);
+      }
+    }
+  }
+  else {
+    _msg =
+      "Unknown type " +
+      `'${_qr_support_type}' for ` +
+      `variable '_qr_support':`;
+    _msg_error(
+      _msg,
+      0);
+    throw _msg;
+  }
+  if ( _qr_support_get ) {
+    _qr_support =
+      "n";
+    _msg =
+      "Set Quantum Support to " +
+      `'${_qr_support}'.`;
+    _msg_info(
+      _msg);
+  }
+  return _qr_support;
+}
+
+function
   _wallet_path_get(
     _wallet_app,
     _wallet_name,
     _qr_support) {
   let
-    _wallet_dir;
-  if ( typeof(
-         _wallet_app) == "undefined" ||
-       _wallet_app == "" ) {
-    _wallet_app =
-      "evm-wallet";
-  }
-  if ( typeof(
-         _wallet_name) == "undefined" ||
-       _wallet_name == "" ) {
-    _wallet_name =
-      "default";
-  }
-  if ( typeof(
-         _qr_support) == "undefined" ||
-       _qr_support == "" ) {
-    _qr_support =
-      "n";
-  }
+    _wallet_app_get,
+    _wallet_dir,
+    _wallet_name_get;
+  _wallet_app =
+    _wallet_app_check(
+      _wallet_app);
+  _wallet_name =
+    _wallet_name_check(
+      _wallet_name);
+  _qr_support =
+    _qr_support_check(
+      _qr_support);
   const
     _home =
       _homedir_get();
@@ -357,6 +541,11 @@ function
       _path_join( [
         _wallet_dir,
         `${_wallet_name}.dat` ]);
+  _msg =
+    "Wallet path is " +
+    `'${_path}'`;
+  _msg_info(
+    _msg);
   return _path;
 }
 
@@ -636,6 +825,208 @@ function
   }
 }
 
+async function
+  _target_network_check(
+    _target_network) {
+  let
+    _target_network_get,
+    _target_network_starts_with,
+    _rpcs;
+  const
+    _target_network_type =
+      typeof(
+        _target_network);
+  _target_network_get =
+    false;
+  if ( _target_network_type === "undefined" ) {
+    _msg =
+      "Target network undefined, setting default " +
+      "(chain ID 1).";
+    _msg_info(
+      _msg);
+    _target_network_get =
+      true;
+  }
+  else if ( _target_network_type === "string" ) {
+    if ( _target_network.length < 1 ) {
+      _msg =
+        "Target network undefined, setting default " +
+        "(chain ID 1).";
+      _msg_info(
+        _msg);
+      _target_network_get =
+        true;
+      }
+    else {
+      if ( _target_network.startsWith(
+             "http") ) {
+        _msg =
+          "Selected target network is " +
+          `'${_target_network}'.`;
+        _msg_info(
+          _msg);
+      }
+      else {
+        _target_network_not_number =
+          Number(
+            _target_network);
+        if ( ! ( _target_network_not_number < 0 ) &&
+             ! ( _target_network_not_number == 0 ) &&
+             ! ( _target_network_not_number > 0 ) ) {
+          _msg =
+            `Target network '${_target_network}' ` +
+            "is not an URL " +
+            "not a Chain ID.";
+          _msg_error(
+            _msg,
+            0);
+          throw _msg;
+        }
+        else {
+          _msg =
+            "Target network " +
+            `'${_target_network}' is a ` +
+            "Chain ID.";
+          _msg_info(
+            _msg);
+          _target_network_get =
+            true;
+        }
+      }
+    }
+  }
+  else {
+    _msg =
+      "Unknown type " +
+      `'${_target_network}' ` +
+      "for variable '_target_network'.";
+    _msg_error(
+      _msg);
+    _echo2(
+      _target_network);
+    throw _msg;
+  }
+  if ( _target_network_get ) {
+    const
+      _target_networks = [
+        _target_network
+      ];
+    const
+      _rpc_get_args = [
+        _target_networks
+      ];
+    try {
+      _rpcs =
+        await _rpc_get.apply(
+          null,
+          _rpc_get_args);
+    }
+    catch(
+      _error) {
+      _msg =
+        "Error running '_rpc_get' with" +
+        "arguments:";
+      _msg_error(
+        _msg,
+        0);
+      _echo2(
+        _error);
+      throw _error;
+    }
+    _target_network =
+      _rpcs[
+        _target_network];
+    _msg_info(
+      _rpcs);
+  }
+  return _target_network;
+}
+
+async function
+  _wallet_address_check(
+    _address,
+    _wallet_seed,
+    _target_network,
+    _api_key,
+    _chain_id,
+    _chain_name,
+    _output_file) {
+  let
+    _address_derive;
+  const
+    _address_type =
+      typeof(
+        _address);
+  _address_derive =
+    false;
+  if ( _address_type === "undefined" ) {
+    _msg =
+      "Wallet address undefined, " +
+      "determining.";
+    _msg_info(
+      _msg);
+    _address_derive =
+      true;
+  }
+  else if ( _address_type === "string" ) {
+    if ( _address.length < 1 ) {
+      _msg =
+        "Wallet address not specified, " +
+        "determining.";
+      _address_derive =
+        true;
+    }
+    else {
+      _msg =
+        "Selected address is " +
+        `'${_address}'.`;
+      _msg_info(
+        _msg);
+    }
+  }
+  else {
+    _msg =
+      `Unknown type '${_address_type}' ` +
+      `for variable '_address':`;
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _address);
+  }
+  if ( _address_derive ) {
+    const
+      _address_get_args = [
+        _wallet_seed,
+        _target_network,
+        _api_key,
+        _chain_id,
+        _chain_name,
+        _output_file
+      ];
+    try {
+      _address =
+        await _address_get.apply(
+          null,
+          _address_get_args);
+    }
+    catch(
+      _error) {
+      _msg =
+        "Error running '_address_get' with " +
+        "arguments:";
+      _msg_error(
+        _msg,
+        0);
+      _echo2(
+        _address_get_args);
+      _echo2(
+        _error);
+      throw _error;
+    }
+  }
+  return _address;
+}
 
 async function
   _wallet_overrides_set(
@@ -731,55 +1122,65 @@ async function
     _target_network =
       _target_networks[
         0];
-    const
-      _target_network_starts_with =
-        _target_network.startsWith;
-    const
-      _target_network_starts_with_type =
-        typeof(
-          _target_network_starts_with);
-    const
-      _target_network_type =
-        typeof(
+    try {
+      _target_network =
+        await _target_network_check(
           _target_network);
-    if ( _target_network_starts_with_type == "undefined" ||
-         _target_network_type == "number" ||
-         _target_network_type == "bigint" ) {
-      _rpcs =
-        await _rpc_get(
-          _target_networks);
-      _rpc_results =
-        _rpcs[
-          _target_network];
-      _msg_info(
+    }
+    catch(
+      _error) {
+      _msg =
+        "Error running '_target_network_check'" +
+        "with parameters:";
+      _msg_error(
+        _msg,
+        0);
+      _echo2(
         _target_network);
+      _echo2(
+        _error);
+      throw _error;
     }
-    else if ( _target_network_type == "string" ) {
-      if ( ! _target_network.startsWith(
-               "https://") &&
-           ! _target_network.startsWith(
-               "wss://") ) {
-        _rpcs =
-          await _rpc_get(
-            _target_networks);
-        _target_network =
-          _rpcs[
-            _target_network];
-        _msg_info(
-          _rpcs);
-      }
+    _wallet_address =
+      _get(
+        "wallet",
+        "address");
+    const
+      _wallet_address_check_args = [
+        _wallet_address,
+        _wallet_seed,
+        _target_network,
+        "",             // _api_key,
+        "",             // _chain_id,
+        "",             // _chain_name,
+        "",             // _output_file
+      ];
+    try {
+      _wallet_address =
+        await _wallet_address_check.apply(
+          null,
+          _wallet_address_check_args);
     }
-    _wallet_address = 
-       await _address_get(
-         _wallet_seed,
-         _target_network,
-         "",             // _api_key,
-         "",             // _chain_id,
-         "",             // _chain_name,
-         "",             // _output_file
-       );
+    catch(
+      _error) {
+      _msg =
+        "Error running '_wallet_address_check'" +
+        "with parameters:";
+      _msg_error(
+        _msg,
+        0);
+      _echo2(
+        _wallet_address_check_args);
+      _echo2(
+        _error);
+      throw _error;
+    }
   }
   else if ( _call_auth == "n" ) {
+    _msg =
+      "Call authentication disabled.";
+    _msg_info(
+      _msg);
     if ( typeof(
            wallet_seed) == "undefined" ) {
       wallet_seed =
@@ -794,28 +1195,41 @@ async function
   if ( typeof(
          wallet_name) == "undefined" ||
        wallet_name == "" ) {
-    wallet_name =
-      _wallet_name;
+    _set(
+      "wallet",
+      "name",
+      _wallet_name);
   }
   if ( typeof(
          wallet_path) == "undefined" ||
        wallet_path == "" ) {
-    wallet_path =
-      _wallet_path;
+    _set(
+      "wallet",
+      "path",
+      _wallet_path);
   }
   if ( typeof(
          wallet_address) == "undefined" ||
        wallet_address == "" ) {
-    wallet_address =
-      _wallet_address;
+    _set(
+      "wallet",
+      "address",
+      _wallet_address);
   }
   if ( typeof(
          wallet_seed) == "undefined" ||
        wallet_seed == "" ||
        wallet_seed == [] ) {
-    wallet_seed =
-      _wallet_seed;
+    _set(
+      "wallet",
+      "seed",
+      _wallet_seed);
   }
+  _msg =
+    "Wallet credentials override " +
+    "function finished running.";
+  _msg_info(
+    _msg);
   return true;
 }
 
@@ -863,11 +1277,22 @@ async function
           "n";
       }
       else {
+        _msg =
+          `Network is the string ` +
+          `'${_network}', ` +
+          `retrieving info.`;
+        _msg_info(
+          _msg);
         _info_retrieve =
           "y";
       }
     }
     else if ( _network_type == "number" ) {
+      _msg =
+        `Network is the number '${_network}', ` +
+        `retrieving info.`;
+      _msg_info(
+        _msg);
       _info_retrieve =
         "y";
     }
@@ -877,7 +1302,8 @@ async function
         `for network variable.`;
       _msg_error(
         _msg,
-        1);
+        0);
+      throw _msg;
     }
     if ( _info_retrieve == "y" ) {
       _evm_chains_info_args = [
@@ -903,11 +1329,25 @@ async function
         _echo(
           _evm_chains_info_args);
       }
-      _rpc_results[
-        _network] =
-        await _evm_chains_info.apply(
-          null,
+      try {
+        _rpc_results[
+          _network] =
+          await _evm_chains_info.apply(
+            null,
+            _evm_chains_info_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_evm_chains_info' " +
+          "with parameters:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
           _evm_chains_info_args);
+        throw _error;
+      }
       _rpc =
         _rpc_results[
           0];
