@@ -1101,21 +1101,81 @@ async function
 }
 
 async function
-  _contract_version_get(
+  _contract_version_check(
+    _app,
     _deployments_dir,
     _contract_name,
     _contract_short_name,
     _network,
     _configuration_format,
-    _contracts_package) {
+    _contracts_package,
+    _user_level) {
+  let
+    _config_file_path,
+    _evm_contracts_tools;
+  try {
+    _evm_contracts_tools =
+      _get(
+        "_evm_contracts",
+        "tools");
+    _evm_contracts_tools =
+      await _evm_contracts_tools_check(
+        _evm_contract_tools)
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running '_evm_contracts_tools_check' " +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _evm_contracts_tools);
+    echo2(
+      _error);
+    throw _error;
+  }
   const
-    _config_file =
-      _path_join([
-        _deployments_dir,
-        _contract_name,
-        _network,
-        `config.${_configuration_format}`
-      ]);
+    _app_check =
+      _evm_contracts_tools._app_check;
+  _app =
+    _app_check(
+      _app);
+  const
+    _config_file_path_check =
+      _evm_contracts_tools._config_file_path_check;
+  const
+    _config_file_path_check_args = [
+      _config_file_path,
+      _app,
+      _deployments_dir,
+      _contract,
+      _network,
+      _network_id,
+      _configuration_format,
+      _user_level
+    ];
+  try {
+    _config_file_path =
+      _config_file_path_check.apply(
+        null,
+        _config_file_path_check_args);
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running '_config_file_path_check' " +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _msg);
+    _echo2(
+      _error);
+    throw _error;
+  }
 }
 
 async function
@@ -1126,7 +1186,8 @@ async function
     _network,
     _user_level,
     _deployments_dir,
-    _contracts_package) {
+    _contracts_package,
+    _configuration_format) {
   let
     _field,
     _msg;
@@ -1142,11 +1203,15 @@ async function
       "");
   }
   const
-    _contract_version_auto_detect_args = [
+    _contract_version_check_args = [
+      _app,
       _deployments_dir,
       _contract_name,
       _contract_short_name,
-      _network
+      _network,
+      _configuration_format,
+      _contracts_package,
+      _user_level
     ];
   try {
     await _contract_version_auto_detect.apply(
