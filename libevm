@@ -1023,6 +1023,198 @@ async function
 }
 
 async function
+  _evm_contracts_tools_check(
+    _evm_contracts_tools) {
+  let
+    _import,
+    _msg;
+  _import =
+    false;
+  const
+    _evm_contracts_tools_type =
+      typeof(
+        _evm_contracts_tools);
+  if ( _evm_contracts_tools_type === "undefined" ) {
+    _msg =
+      "Function '_evm_contracts_tools' " +
+      "undefined, importing.";
+    _import =
+      true;
+  }
+  else if ( _evm_contracts_tools_type === "string" ) {
+    if ( _evm_contracts_tools.length < 1 ) {
+      _msg =
+        "Function '_evm_contracts_tools' " +
+        "is an empty string, importing.";
+      _import =
+        true;
+    }
+    else {
+      _msg =
+        "Module '_evm_contracts_tools' " +
+        "is a string.";
+      _msg_error(
+        _msg,
+        0);
+      throw _msg;
+    }
+  }
+  else if ( _evm_contracts_tools_type === "object" ) {
+    const
+      _evm_contracts_tools_keys =
+        Object.keys(
+          _evm_contracts_tools);
+    if ( _evm_contracts_tools_keys.length < 1 ) {
+      _msg =
+        "Module '_evm_contracts_tools' " +
+        "is an empty object, importing.";
+      _import =
+        true;
+    }
+  }
+  if ( _import ) {
+    try {
+      const
+        _evm_contracts_tools =
+          await _require(
+            "evm-contracts-tools");
+    }
+    catch(
+      _error) {
+      _msg =
+        "Error importing 'evm-contracts-tools'.";
+      _msg_error(
+        _msg,
+        0);
+      throw _msg;
+    }
+  }
+  return _evm_contracts_tools;
+}
+
+async function
+  _contract_address_auto_detect() {
+}
+
+async function
+  _contract_version_auto_detect() {
+}
+
+async function
+  _contract_version_get(
+    _deployments_dir,
+    _contract_name,
+    _contract_short_name,
+    _network,
+    _configuration_format,
+    _contracts_package) {
+  const
+    _config_file =
+      _path_join([
+        _deployments_dir,
+        _contract_name,
+        _network,
+        `config.${_configuration_format}`
+      ]);
+}
+
+async function
+  _contract_setup_auto_detect(
+    _app,
+    _contract_name,
+    _contract_short_name,
+    _network,
+    _user_level,
+    _deployments_dir,
+    _contracts_package) {
+  let
+    _field,
+    _msg;
+  const
+    _fields = [
+      "address"
+      "version"
+    ];
+  for ( _field of _fields ) {
+    _set(
+      _contract_short_name,
+      _field,
+      "");
+  }
+  const
+    _contract_version_auto_detect_args = [
+      _deployments_dir,
+      _contract_name,
+      _contract_short_name,
+      _network
+    ];
+  try {
+    await _contract_version_auto_detect.apply(
+      null,
+      _contract_version_auto_detect_args);
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running '_contract_version_auto_detect' " +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _contract_version_auto_detect_args);
+    _echo2(
+      _error);
+    throw _error;
+  }
+  const
+    _contract_version =
+      _get(
+        _contract_short_name,
+        "version");
+  const
+    _contract_address_auto_detect_args = [
+      _app,
+      _contract_name,
+      _contract_short_name,
+      _network,
+      _contract_version,
+      _user_level,
+      _deployments_dir
+    ];
+  try {
+    await _contract_address_auto_detect.apply(
+      null,
+      _contract_address_auto_detect_args);
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running '_contract_address_auto_detect' " +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _contract_address_auto_detect_args);
+    _echo2(
+      _error);
+    throw _error;
+  }
+  const
+    _contract_address =
+      _get(
+        _contract_short_name,
+        "address");
+  _msg =
+    `Selected contract '${_contract_name}' ` +
+    `version '${_contract_version}' deployed ` +
+    `at address '${_contract_address}'`;
+  _msg_info(
+    _msg);
+}
+
+async function
   _wallet_address_check(
     _address,
     _wallet_seed,
@@ -1469,11 +1661,15 @@ async function
 // ES6 module exports
 
 export {
+  _contract_address_auto_detect,
   _contract_abi_get,
   _contract_bytecode_get,
   _contract_compiler_output_get,
+  _contract_setup_auto_detect,
+  _contract_version_auto_detect,
   _evm_chains_db_path_get,
   _evm_chain_info_get,
+  _evm_contracts_tools_check,
   _libevm_app_cmdline_parse,
   _libevm_cmdline_parse,
   _libevm_app_global_variables,
@@ -1481,23 +1677,31 @@ export {
   _libevm_url_parse,
   _rpc_backend_get,
   _rpc_get,
+  _wallet_address_check,
   _wallet_overrides_set
 };
-
 
 // Common Javascript exports
 
 // module.exports = {
 //   _contract_abi_get:
 //     _contract_abi_get,
+//   _contract_address_auto_detect:
+//     _contract_address_auto_detect,
 //   _contract_bytecode_get:
 //     _contract_bytecode_get,
 //   _contract_compiler_output_get:
 //     _contract_compiler_output_get,
+//   _contract_setup_auto_detect:
+//     _contract_setup_auto_detect,
+//   _contract_version_auto_detect:
+//     _contract_version_auto_detect,
 //   _evm_chains_db_path_get:
 //     _evm_chains_db_path_get,
 //   _evm_chain_info_get:
 //     _evm_chain_info_get,
+//   _evm_contracts_tools_check:
+//     _evm_contracts_tools_check,
 //   _libevm_app_cmdline_parse:
 //     _libevm_app_cmdline_parse,
 //   _libevm_cmdline_parse:
@@ -1512,6 +1716,8 @@ export {
 //     _rpc_backend_get,
 //   _rpc_get:
 //     _rpc_get,
+//   _wallet_address_check:
+//     _wallet_address_check,
 //   _wallet_overrides_set:
 //     _wallet_overrides_set
 // };
