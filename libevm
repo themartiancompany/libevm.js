@@ -1101,7 +1101,109 @@ async function
 }
 
 async function
+  _contracts_package_check(
+    _contracts_package,
+    _app) {
+  let
+    _contracts_package_get =
+      false;
+  const
+    _contracts_package_type =
+      typeof(
+        _contracts_package);
+  if ( _contracts_package_type === "undefined" ) {
+    _msg =
+      "Contracts package undefined, auto-detecting.";
+    _msg_info(
+      _msg);
+    _contracts_package_get =
+      true;
+  }
+  else if ( _contracts_package_type === "string" ) {
+    if ( _contracts_package.length < 1 ) {
+      _msg =
+        "Contracts package undefined, auto-detecting.";
+      _msg_info(
+        _msg);
+      _contracts_package_get =
+        true;
+    }
+  }
+  else {
+    _msg =
+      `Unknown type '${_contracts_package_type}' `
+      "for variable '_contracts_package' (correct " +
+      "type 'string').";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _msg);
+    throw _error;
+  }
+  if ( _contracts_package_get ) {
+    try {
+      _evm_contracts_tools =
+        _get(
+          "_evm_contracts",
+          "tools");
+      _evm_contracts_tools =
+        await _evm_contracts_tools_check(
+          _evm_contract_tools)
+    }
+    catch(
+      _error) {
+      _msg =
+        "Error running '_evm_contracts_tools_check' " +
+        "with arguments:";
+      _msg_error(
+        _msg,
+        0);
+      _echo2(
+        _evm_contracts_tools);
+      echo2(
+        _error);
+      throw _error;
+    }
+    const
+      _app_type =
+        typeof(
+          _app);
+    if ( _app_type === "string" ) {
+      if ( 0 < _app.length ) {
+        const
+          _app_check =
+            _evm_contracts_tools._app_check;
+        _app =
+          _app_check(
+            _app);
+        try {
+          _module =
+            await _require(
+              `${_app}-contracts`);
+        }
+        catch(
+          _error) {
+          _msg =
+            `Found no '${_app}-contracts' module`;
+          _msg_error(
+            _msg,
+            0);
+          _echo2(
+            _error);
+          throw _error;
+        }
+        _contracts_package =
+          `${_app}-contracts`;
+      }
+    }
+  }
+  return _contracts_package;
+}
+
+async function
   _contract_version_check(
+    _version,
     _app,
     _deployments_dir,
     _contract_name,
@@ -1112,7 +1214,48 @@ async function
     _user_level) {
   let
     _config_file_path,
-    _evm_contracts_tools;
+    _evm_contracts_tools,
+    _msg;
+  const
+    _version_type =
+      typeof(
+        _version);
+  if ( _version_type === "undefined" ) {
+    _msg =
+      "Version undefined, " +
+      "auto-detecting.";
+    _msg_info(
+      _msg);
+    _version_get =
+      true;
+  else if ( _version_type === "string" ) {
+    if ( _version.length < 1 ) {
+      _msg =
+        "Version not specified, " +
+        "auto-detecting.";
+      _msg_info(
+        _msg);
+      _version_get =
+        true;
+    }
+  }
+  else {
+    _msg =
+      `Unknown type '${_version_type}' ` +
+      `for variable '_version'.`;
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _msg);
+    _echo2(
+      _error);
+    throw _error;
+  }
+  if ( _version_get ) {
+    if ( _contracts_package != "" ) {
+    }
+  }
   try {
     _evm_contracts_tools =
       _get(
@@ -1143,6 +1286,12 @@ async function
     _app_check(
       _app);
   const
+    _configuration_format =
+      _evm_contracts_tools._configuration_format_check;
+  _configuration_format =
+    _configuration_format_check(
+      _configuration_format);
+  const
     _config_file_path_check =
       _evm_contracts_tools._config_file_path_check;
   const
@@ -1150,7 +1299,7 @@ async function
       _config_file_path,
       _app,
       _deployments_dir,
-      _contract,
+      _contract_name,
       _network,
       _network_id,
       _configuration_format,
@@ -1171,11 +1320,50 @@ async function
       _msg,
       0);
     _echo2(
-      _msg);
+      _config_file_path_checks_args);
     _echo2(
       _error);
     throw _error;
   }
+  const
+    _version_check =
+      _evm_contracts_tools._version_check;
+  const
+    _contract_address =
+      undefined;
+  const
+    _version_check_args = [
+      _version,
+      _app,
+      _contract_name,
+      _contract_address,
+      _network,
+      _user_level
+      _deployments_dir,
+      _config_file_path,
+      _configuration_format,
+    ];
+  try {
+    _version =
+      _version_check.apply(
+        null,
+        _version_check_args);
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running '_version_check' " +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _version_check_args);
+    _echo2(
+      _error);
+    throw _error;
+  }
+  return _version;
 }
 
 async function
