@@ -1,3 +1,9 @@
 [submodule "man"]
 	path = man
 	url = https://github.com/themartiancompany/libevm-man
+[submodule "data"]
+	path = data
+	url = https://github.com/themartiancompany/libevm-data
+[submodule "docs"]
+	path = docs
+	url = https://github.com/themartiancompany/libevm-docs

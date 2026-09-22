@@ -22,9 +22,24 @@
 [comment]: <> (If not, see <https://www.gnu.org/licenses/>.)
 [comment]: <> (SPDX-License-Identifier: AGPL-3.0)
 
-# EVM Library (`libevm.js`)
+# EVM Library Javascript implementation (`libevm.js`)
 
-Library providing useful functions
+<div
+   align="center">
+  <a
+     href="https://github.com/themartiancompany/libevm">
+    <img
+       src="https://raw.githubusercontent.com/themartiancompany/libevm-data/dc70ed554eac6b9d5f0f7cff91b323c137dc1d72/libevm.png"
+       width="500"
+    />
+  </a>
+</div>
+
+Javascript implementation of the Ethereum Virtual Machine
+Library
+([`libevm`](
+  https://github.com/themartiancompany/libevm)), which is
+a library providing useful functions
 to write native applications interacting with EVM-compatible
 blockchain networks.
 
@@ -81,28 +96,13 @@ LibEVM is a core component of the Human Instrumentality Project (HIP).
 
 ## Documentation
 
-You can immediately start using this library into your Bash program by
-pasting the following at its beginning:
-
-```bash
-_bin="$(
-  dirname \
-    "$( \
-      command \
-        -v \
-	  "env")")"
-_lib="${_bin}/../lib"
-source \
-  "${_lib}/libevm/libevm"
-```
-
-For a Javascript program or library you can use a similarly styled
-import:
+You can immediately start using this library into your program
+with just an import.
 
 ```javascript
 const
   _libevm_module =
-    require(
+    await import(
       "libevm");
 ```
 
@@ -115,9 +115,11 @@ man \
   libevm
 ```
 
-It's currently suggested to look at existing programs
-depending on the library to speed up the library usage
-understanding.
+Some documentation is available in the
+[`docs`](
+  docs)
+submodule directory, which should accompany
+reading existing programs depending on the library.
 
 ## Installation
 
@@ -173,7 +175,7 @@ https://github.com/themartiancompany/fur/tree/libevm)
 
 The package has also been published
 on the NPM Registry as
-[`evm-chains-info`](
+[`libevm`](
   https://npmjs.com/package/libevm)
 and so it can be installed from there by typing
 

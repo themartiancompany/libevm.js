@@ -1253,7 +1253,20 @@ async function
     throw _error;
   }
   if ( _version_get ) {
-    if ( _contracts_package != "" ) {
+    const
+      _contracts_package_check_args = [
+        _contracts_package,
+        _app
+      ];
+    try {
+      _contracts_package =
+        _contracts_package_check.apply(
+          null,
+          _contracts_package_check_args);
+      _contracts_package_module =
+        await _require(
+          _contracts_package);
+      }
     }
   }
   try {
