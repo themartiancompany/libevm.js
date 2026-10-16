@@ -1882,6 +1882,11 @@ async function
       _error);
     throw _error;
   }
+  _msg =
+    "Obtained contract version " +
+    `'${_contract_version}'.`
+  _msg_info(
+    _msg);
   // _contract_address =
   //   _get(
   //     _contract_short_name,
@@ -1890,6 +1895,7 @@ async function
     _contract_address_check_args = [
       _contract_address,
       _app,
+      _contracts_package,
       _contract_name,
       _contract_short_name,
       _network,
