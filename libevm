@@ -1142,7 +1142,7 @@ async function
   const
     _contract_address_type =
       typeof(
-        _contract_address_type);
+        _contract_address);
   if ( _contract_address_type === "undefined" ) {
     _msg =
       "Contract address is undefined, " +
@@ -1193,7 +1193,8 @@ async function
     const
       _contracts_package_module_check_args = [
         _contracts_package_module,
-        _contracts_package
+        _contracts_package,
+        _app,
       ];
     try {
       _contracts_package_module =
@@ -1535,7 +1536,9 @@ async function
         _contracts_package_module);
   if ( _contracts_package_module_type === "undefined" ) {
     _msg =
-      "Contracts package module undefined, " +
+      "Contracts package module " +
+      `'${_contracts_package}' for ` +
+      `LibEVM application '${_app}' undefined, ` +
       "initializing.";
     _msg_info(
       _msg);
@@ -1545,7 +1548,10 @@ async function
   else if ( _contracts_package_module_type === "string" ) {
     if ( _contracts_package_module.length < 1 ) {
       _msg =
-        "Contracts package module is an empty string, " +
+        "Contracts package module " +
+        `'${_contracts_package}' for ` +
+        `LibEVM application '${_app}' ` +
+        "contracts package module is an empty string, " +
         "initializing.";
       _msg_info(
         _msg);
