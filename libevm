@@ -1916,7 +1916,7 @@ async function
   }
   _msg =
     "Obtained contract version " +
-    `'${_contract_version}'.`
+    `'${_contract_version}'.`;
   _msg_info(
     _msg);
   // _contract_address =
