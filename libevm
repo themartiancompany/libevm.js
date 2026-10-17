@@ -1131,6 +1131,7 @@ async function
     _deployments_dir) {
   let
     _contract_address_get,
+    _contract_address_type,
     _contracts_package_get,
     _contracts_package_module,
     _contracts_fs_get,
@@ -1139,10 +1140,9 @@ async function
     _msg;
   _contract_address_get =
     false;
-  const
-    _contract_address_type =
-      typeof(
-        _contract_address);
+  _contract_address_type =
+    typeof(
+      _contract_address);
   if ( _contract_address_type === "undefined" ) {
     _msg =
       "Contract address is undefined, " +
@@ -1240,11 +1240,10 @@ async function
           _user_level
         ];
       try {
-        [ _contract_version ] =
+        _contract_version =
           await _contract_version_check.apply(
             null,
             _contract_version_check_args);
-          "";
       }
       catch(
         _error) {
@@ -1254,6 +1253,8 @@ async function
         _msg_error(
           _msg,
           0);
+        _echo2(
+          _contract_version_check_args);
         throw _msg;
       }
     }
@@ -1277,12 +1278,26 @@ async function
           _network,            // chain id
           _contract_version
         ];
+      _msg =
+        "Running '_data_get' with arguments:";
+      _msg_info(
+        _msg);
+      const
+        _global =
+          _global_get();
+      const
+        _quiet =
+          _global[
+            "quiet"];
+      if ( _quiet == "n" ) {
+        _echo(
+          _data_get_args);
+      }
       _contract_address =
         _data_get.apply(
           null,
-          _data_get_args);
-      _echo2(
-        _contract_address);
+          _data_get_args)[
+            _contract_version];
     }
     if ( _contracts_fs_get ) {
       try {
@@ -1390,20 +1405,23 @@ async function
         throw _error;
       }
     }
-    _msg =
-      `Resolved address:`;
-    _msg_info(
-      _msg);
-    const
-      _global =
-        _global_get();
-    const
-      _quiet =
-        _global[
-          "quiet"];
-    if ( _quiet == "n" ) {
-      _echo2(
+    _contract_address_type =
+      typeof(
         _contract_address);
+    if ( _contract_address_type === "string" ) {
+      _msg =
+        `Resolved address '${_contract_address}'`;
+      _msg_info(
+        _msg);
+    }
+    else {
+      _msg =
+        "Auto-detected ontract address " +
+        `has type '${_contract_address_type}'.`;
+      _msg_error(
+        _msg,
+        0);
+      throw _msg;
     }
   }
   return _contract_address;
@@ -1623,6 +1641,11 @@ async function
     _version_type =
       typeof(
         _version);
+  _msg =
+    "Checking validity of contract " +
+    `version '${_version}'.`;
+  _msg_info(
+    _msg);
   if ( _version_type === "undefined" ) {
     _msg =
       "Version undefined, " +
@@ -1713,7 +1736,7 @@ async function
             "quiet"];
       if ( _quiet == "n" ) {
         _echo(
-          _version);
+          _data_get_args);
       }
       _version =
         _data_get.apply(
