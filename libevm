@@ -1188,6 +1188,12 @@ async function
     throw _msg;
   }
   if ( _contract_address_get ) {
+    _msg =
+      "Auto-detecting contract address for " +
+      `contract '${_contract_name}' at ` +
+      `version '${_contract_version}'.`;
+    _msg_info(
+      _msg);
     _contracts_package_get =
       false;
     const
@@ -1234,7 +1240,7 @@ async function
           _user_level
         ];
       try {
-        _contract_version =
+        [ _contract_version ] =
           await _contract_version_check.apply(
             null,
             _contract_version_check_args);
@@ -1264,38 +1270,9 @@ async function
         _data_get =
           _contracts_package_module._data_get;
       const
-        _contract_version_check_args = [
-          _contract_version,
-          _app,
-          _deployments_dir,
-          _contract_name,
-          _contract_short_name,
-          _network,
-          _configuration_format,
-          _contracts_package,
-          _user_level
-        ];
-      try {
-        _contract_version =
-          await _contract_version_check.apply(
-            null,
-            _contract_version_check_args);
-          "";
-      }
-      catch(
-        _error) {
-        _msg =
-          "Error running '_contract_version_check' " +
-          "with arguments:";
-        _msg_error(
-          _msg,
-          0);
-        throw _msg;
-      }
-      const
         _data_get_args = [
           _contract_name,
-          "address",           // data type
+          "contract-address",  // data type
           "object",            // output type
           _network,            // chain id
           _contract_version
@@ -1304,6 +1281,8 @@ async function
         _data_get.apply(
           null,
           _data_get_args);
+      _echo2(
+        _contract_address);
     }
     if ( _contracts_fs_get ) {
       try {
@@ -1410,6 +1389,21 @@ async function
           _error);
         throw _error;
       }
+    }
+    _msg =
+      `Resolved address:`;
+    _msg_info(
+      _msg);
+    const
+      _global =
+        _global_get();
+    const
+      _quiet =
+        _global[
+          "quiet"];
+    if ( _quiet == "n" ) {
+      _echo2(
+        _contract_address);
     }
   }
   return _contract_address;
@@ -1706,6 +1700,21 @@ async function
           _network,            // chain id
           _version
         ];
+      _msg =
+        "Running '_data_get' with arguments:";
+      _msg_info(
+        _msg);
+      const
+        _global =
+          _global_get();
+      const
+        _quiet =
+          _global[
+            "quiet"];
+      if ( _quiet == "n" ) {
+        _echo(
+          _version);
+      }
       _version =
         _data_get.apply(
           null,
@@ -1863,7 +1872,7 @@ async function
       _user_level
     ];
   try {
-    _contract_version =
+    [ _contract_version ] =
       await _contract_version_check.apply(
         null,
         _contract_version_check_args);
