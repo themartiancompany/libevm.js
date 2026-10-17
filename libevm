@@ -1966,6 +1966,14 @@ async function
     `at address '${_contract_address}'`;
   _msg_info(
     _msg);
+  _set(
+    _contract_short_name,
+    "address",
+    _contract_address);
+  _set(
+    _contract_short_name,
+    "version",
+    _contract_version);
 }
 
 async function
