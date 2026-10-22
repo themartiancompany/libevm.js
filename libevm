@@ -834,6 +834,12 @@ function
     _argv_url_get(
       "api_key")[
         0]);
+  _set(
+    "price",
+    "gas",
+    _argv_url_get(
+      "price_gas")[
+        0]);
   target_networks.push(
     _argv_url_get(
       "network")[
