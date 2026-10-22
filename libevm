@@ -226,6 +226,13 @@ function
     "networks",
     []);
   /* global
+       price_gas:
+         writable */
+  _set(
+    "price",
+    "gas",
+    "");
+  /* global
        rpc_selection:
          writable */
   _set(
@@ -685,67 +692,103 @@ function
   _libevm_cmdline_parse(
     _argv) {
   if ( "N" in _argv ) {
-    wallet_name =
+    _set(
+      "wallet",
+      "name",
       _argv[
-        "N"];
+        "N"]);
   }
   if ( "wallet-name" in _argv ) {
-    wallet_name =
+    _set(
+      "wallet",
+      "name",
       _argv[
-        "wallet-name"];
+        "wallet-name"]);
   }
   if ( "w" in _argv ) {
-    wallet_path =
+    _set(
+      "wallet",
+      "path",
       _argv[
-        "w"];
+        "w"]);
   }
   if ( "wallet-path" in _argv ) {
-    wallet_path =
+    _set(
+      "wallet",
+      "path",
       _argv[
-        "wallet-path"];
+        "wallet-path"]);
   }
   if ( "p" in _argv ) {
-    wallet_password =
+    _set(
+      "wallet",
+      "password",
       _argv[
-        "p"];
+        "p"]);
   }
   if ( "wallet-password" in _argv ) {
-    wallet_path =
+    _set(
+      "wallet",
+      "path",
       _argv[
-        "wallet-password"];
+        "wallet-password"]);
   }
   if ( "s" in _argv ) {
-    wallet_seed =
+    _set(
+      "wallet",
+      "seed",
       _argv[
-        "s"];
+        "s"]);
   }
   if ( "wallet-seed" in _argv ) {
-    wallet_seed =
+    _set(
+      "wallet",
+      "seed",
       _argv[
-        "wallet-seed"];
+        "wallet-seed"]);
   }
   if ( "k" in _argv ) {
-    api_key =
+    _set(
+      "api",
+      "key",
       _argv[
-        "k"];
+        "k"]);
   }
   if ( "api-key" in _argv ) {
-    api_key =
+    _set(
+      "api",
+      "key",
       _argv[
-        "api-key"];
+        "api-key"]);
   }
   if ( "T" in _argv ) {
-    api_key =
+    _set(
+      "api",
+      "key",
       _argv[
-        "T"];
+        "T"]);
   }
   if ( "call-timeout" in _argv ) {
-    call_timeout =
+    _set(
+      "call",
+      "timeout",
       _argv[
-        "call-timeout"];
+        "call-timeout"]);
   }
   if ( "n" in _argv ) {
     target_networks.push(
+      _argv[
+        "n"]);
+  }
+  if ( "network" in _argv ) {
+    target_networks.push(
+      _argv[
+        "network"]);
+  }
+  if ( "g" in _argv ) {
+    _set(
+      "price",
+      "gas",
       _argv[
         "n"]);
   }
@@ -760,22 +803,30 @@ function
   _libevm_url_parse() {
   /* global
        _argv_url_get */
-  wallet_path =
+  _set(
+    "wallet",
+    "path",
     _argv_url_get(
       "wallet_path")[
-        0];
-  wallet_password =
+        0]);
+  _set(
+    "wallet",
+    "password",
     _argv_url_get(
       "wallet_password")[
-        0];
-  wallet_seed =
+        0]);
+  _set(
+    "wallet",
+    "seed",
     _argv_url_get(
       "wallet_seed")[
-        0];
-  api_key =
+        0]);
+  _set(
+    "api",
+    "key",
     _argv_url_get(
       "api_key")[
-        0];
+        0]);
   target_networks.push(
     _argv_url_get(
       "network")[
@@ -786,37 +837,49 @@ function
   _libevm_app_cmdline_parse(
     _argv) {
   if ( "u" in _argv ) {
-    user_level =
+    _set(
+      "user",
+      "level",
       _argv[
-        "u"];
+        "u"]);
   }
   if ( "user-level" in _argv ) {
-    user_level =
+    _set(
+      "user",
+      "level",
       _argv[
-        "user_level"];
+        "user_level"]);
   }
   if ( "d" in _argv ) {
-    deployments_dir =
+    _set(
+      "deployments",
+      "dir",
       _argv[
-        "d"];
+        "d"]);
   }
   if ( "deployments-dir" in _argv ) {
-    deployments_dir =
+    _set(
+      "deployments",
+      "dir",
       _argv[
-        "deployments_dir"];
+        "deployments_dir"]);
   }
 }
 
 function
   _libevm_app_url_parse() {
-  user_level =
+  _set(
+    "user",
+    "level",
     _argv_url_get(
       "user_level")[
-        0];
-  deployments_dir =
+        0]);
+  _set(
+    "deployments",
+    "dir",
     _argv_url_get(
       "deployments_dir")[
-        0];
+        0]);
 }
 
 function
@@ -2272,6 +2335,10 @@ async function
     "user",
     "level",
     "n");
+  _override_set(
+    "price",
+    "gas",
+    "");
   const
     _user_level =
       _get(
