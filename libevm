@@ -233,6 +233,13 @@ function
     "gas",
     "");
   /* global
+       measure_unit:
+         writable */
+  _set(
+    "measure",
+    "unit",
+    "");
+  /* global
        rpc_selection:
          writable */
   _set(
@@ -799,10 +806,19 @@ function
       _argv[
         "price-gas"]);
   }
-  if ( "network" in _argv ) {
-    target_networks.push(
+  if ( "U" in _argv ) {
+    _set(
+      "measure",
+      "unit",
       _argv[
-        "network"]);
+        "U"]);
+  }
+  if ( "measure-unit" in _argv ) {
+    _set(
+      "measure",
+      "unit",
+      _argv[
+        "measure-unit"]);
   }
 }
 
@@ -839,6 +855,12 @@ function
     "gas",
     _argv_url_get(
       "price_gas")[
+        0]);
+  _set(
+    "measure",
+    "unit",
+    _argv_url_get(
+      "measure_unit")[
         0]);
   target_networks.push(
     _argv_url_get(
