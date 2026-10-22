@@ -790,7 +790,14 @@ function
       "price",
       "gas",
       _argv[
-        "n"]);
+        "g"]);
+  }
+  if ( "price-gas" in _argv ) {
+    _set(
+      "price",
+      "gas",
+      _argv[
+        "price-gas"]);
   }
   if ( "network" in _argv ) {
     target_networks.push(
