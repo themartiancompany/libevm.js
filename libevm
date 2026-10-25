@@ -3094,10 +3094,10 @@ async function
     _contract_compiler_output);
   const
     _output = [
-    _contract_abi,
-    _contract_bytecode,
-    _contract_compiler_output
-  ];
+      _contract_abi,
+      _contract_bytecode,
+      _contract_compiler_output
+    ];
   return _output;
 }
 
