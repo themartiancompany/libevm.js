@@ -2971,7 +2971,7 @@ async function
       _contract_name,
       _contract_short_name,
       _network,
-      _contract_version
+      _contract_version,
       _contracts_package,
       _configuration_format,
       _contracts_package,
@@ -3012,7 +3012,7 @@ async function
       _contract_name,
       _contract_short_name,
       _network,
-      _contract_version
+      _contract_version,
       _contracts_package,
       _configuration_format,
       _contracts_package,
@@ -3053,7 +3053,7 @@ async function
       _contract_name,
       _contract_short_name,
       _network,
-      _contract_version
+      _contract_version,
       _contracts_package,
       _configuration_format,
       _contracts_package,
