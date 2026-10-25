@@ -339,6 +339,290 @@ function
 }
 
 function
+  _contract_abi_check(
+    _abi,
+    _app,
+    _deployments_dir,
+    _contract_name,
+    _contract_short_name,
+    _network,
+    _version,
+    _contracts_package,
+    _user_level) {
+  let
+    _contracts_fs_get,
+    _contracts_package_get,
+    _contracts_package_module,
+    _evm_contracts_tools,
+    _msg,
+    _abi_get;
+  _abi_get =
+    false;
+  const
+    _abi_type =
+      typeof(
+        _abi);
+  _msg =
+    "Checking validity of contract ABI " +
+    `path '${_abi}'.`;
+  _msg_info(
+    _msg);
+  if ( _bytecode_type === "undefined" ) {
+    _msg =
+      "Contract ABI undefined, " +
+      "auto-detecting.";
+    _msg_info(
+      _msg);
+    _abi_get =
+      true;
+  }
+  else if ( _abi_type === "string" ) {
+    if ( _abi.length < 1 ) {
+      _msg =
+        "Contract ABI not specified, " +
+        "auto-detecting.";
+      _msg_info(
+        _msg);
+      _abi_get =
+        true;
+    }
+  }
+  else {
+    _msg =
+      `Unknown type '${_abi_type}' ` +
+      `for variable '_abi'.`;
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _abi);
+    throw _msg;
+  }
+  if ( _abi_get ) {
+    _contracts_package_get =
+      false;
+    const
+      _contracts_package_module_check_args = [
+        _contracts_package_module,
+        _contracts_package,
+        _app
+      ];
+    try {
+      _contracts_package_module =
+        await _contracts_package_module_check.apply(
+          null,
+          _contracts_package_module_check_args);
+      _contracts_package_get =
+        true;
+      _contracts_fs_get =
+        false;
+    }
+    catch(
+      _error) {
+      _msg =
+        "Found no contract package module " +
+        `'${_contracts_package}'.`;
+      _msg_warning(
+        _msg);
+      _echo2(
+        _error);
+      _contracts_fs_get =
+        true;
+      // throw _error;
+    }
+    if ( _contracts_package_get ) {
+      const
+        _data_get =
+          _contracts_package_module._data_get;
+      _abi =
+        "";
+      const
+        _data_get_args = [
+          _contract_name,
+          "abi"                // data type
+          "path",              // output type
+          _network,            // chain id
+          _version
+        ];
+      _msg =
+        "Running '_data_get' with arguments:";
+      _msg_info(
+        _msg);
+      const
+        _global =
+          _global_get();
+      const
+        _quiet =
+          _global[
+            "quiet"];
+      if ( _quiet == "n" ) {
+        _echo(
+          _data_get_args);
+      }
+      _abi =
+        _data_get.apply(
+          null,
+          _data_get_args);
+    }
+    if ( _contracts_fs_get ) {
+      try {
+        _evm_contracts_tools =
+          _get(
+            "_evm_contracts",
+            "tools");
+        _evm_contracts_tools =
+          await _evm_contracts_tools_check(
+            _evm_contracts_tools);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_evm_contracts_tools_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _evm_contracts_tools);
+        _echo2(
+          _error);
+        throw _error;
+      }
+      const
+        _app_check =
+          _evm_contracts_tools._app_check;
+      _app =
+        _app_check(
+          _app);
+      const
+        _deployment_dir_args = [
+          _deployments_dir,
+          _app_name,
+          _user_level
+        ];
+      try {
+        _deployments_dir =
+          _deployments_dir_check.apply(
+            null,
+            _deployments_dir_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_deployments_dir_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _deploymens_dir_check_args);
+        _echo2(
+          _error);
+        throw _error;
+      }
+      const
+        _configuration_format_check =
+          _evm_contracts_tools._configuration_format_check;
+      _configuration_format =
+        _configuration_format_check(
+          _configuration_format);
+      const
+        _config_file_path_check =
+          _evm_contracts_tools._config_file_path_check;
+      const
+        _config_file_path_check_args = [
+          _config_file_path,
+          _app,
+          _deployments_dir,
+          _contract_name,
+          _network,
+          _network,
+          _configuration_format,
+          _user_level
+        ];
+      try {
+        _config_file_path =
+          _config_file_path_check.apply(
+            null,
+            _config_file_path_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_config_file_path_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _config_file_path_check_args);
+        _echo2(
+          _error);
+        throw _error;
+      }
+      const
+        _contract_version_check_args = [
+          _version,
+          _app,
+          _deployments_dir,
+          _contract_name,
+          _contract_short_name,
+          _network,
+          _configuration_format,
+          _contracts_package,
+          _user_level
+        ];
+      try {
+        _version =
+          await _contract_version_check.apply(
+            null,
+            _contract_version_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_contract_version_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _contract_version_check_args);
+        throw _msg;
+      }
+      const
+        _contract_abi_get_args = [
+          _deployments_dir,
+          _contract_name,
+          _network,
+          _version) {
+        ];
+      try {
+        _abi =
+          _contract_abi_get.apply(
+            null,
+            _contract_abi_get_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_contract_abi_get' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _contract_abi_check_args);
+        _echo2(
+          _error);
+        throw _error;
+      }
+    }
+  }
+  return _abi;
+}
+
+function
   _contract_bytecode_check(
     _bytecode,
     _app,
@@ -495,6 +779,32 @@ function
         _app_check(
           _app);
       const
+        _deployment_dir_args = [
+          _deployments_dir,
+          _app_name,
+          _user_level
+        ];
+      try {
+        _deployments_dir =
+          _deployments_dir_check.apply(
+            null,
+            _deployments_dir_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_deployments_dir_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _deploymens_dir_check_args);
+        _echo2(
+          _error);
+        throw _error;
+      }
+      const
         _configuration_format_check =
           _evm_contracts_tools._configuration_format_check;
       _configuration_format =
@@ -535,7 +845,37 @@ function
         throw _error;
       }
       const
-        _bytecode_get_args = [
+        _contract_version_check_args = [
+          _version,
+          _app,
+          _deployments_dir,
+          _contract_name,
+          _contract_short_name,
+          _network,
+          _configuration_format,
+          _contracts_package,
+          _user_level
+        ];
+      try {
+        _version =
+          await _contract_version_check.apply(
+            null,
+            _contract_version_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_contract_version_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _contract_version_check_args);
+        throw _msg;
+      }
+      const
+        _contract_bytecode_get_args = [
           _deployments_dir,
           _contract_name,
           _network,
@@ -545,7 +885,7 @@ function
         _bytecode =
           _contract_bytecode_get.apply(
             null,
-            _version_check_args);
+            _contract_bytecode_get_args);
       }
       catch(
         _error) {
@@ -556,14 +896,298 @@ function
           _msg,
           0);
         _echo2(
-          _version_check_args);
+          _contract_bytecode_check_args);
         _echo2(
           _error);
         throw _error;
       }
     }
   }
-  return _version;
+  return _bytecode;
+}
+
+function
+  _contract_compiler_output_check(
+    _compiler_output,
+    _app,
+    _deployments_dir,
+    _contract_name,
+    _contract_short_name,
+    _network,
+    _version,
+    _contracts_package,
+    _user_level) {
+  let
+    _contracts_fs_get,
+    _contracts_package_get,
+    _contracts_package_module,
+    _evm_contracts_tools,
+    _msg,
+    _compiler_output_get;
+  _compiler_output_get =
+    false;
+  const
+    _compiler_output_type =
+      typeof(
+        _compiler_output);
+  _msg =
+    "Checking validity of contract compiler " +
+    `output path '${_bytecode}'.`;
+  _msg_info(
+    _msg);
+  if ( _compiler_output_type === "undefined" ) {
+    _msg =
+      "Contract compiler output undefined, " +
+      "auto-detecting.";
+    _msg_info(
+      _msg);
+    _compiler_output_get =
+      true;
+  }
+  else if ( _compiler_output_type === "string" ) {
+    if ( _compiler_output.length < 1 ) {
+      _msg =
+        "Contract compiler output not specified, " +
+        "auto-detecting.";
+      _msg_info(
+        _msg);
+      _compiler_output_get =
+        true;
+    }
+  }
+  else {
+    _msg =
+      `Unknown type '${_compiler_output_type}' ` +
+      `for variable '_compiler_output'.`;
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _compiler_output);
+    throw _msg;
+  }
+  if ( _compiler_output_get ) {
+    _contracts_package_get =
+      false;
+    const
+      _contracts_package_module_check_args = [
+        _contracts_package_module,
+        _contracts_package,
+        _app
+      ];
+    try {
+      _contracts_package_module =
+        await _contracts_package_module_check.apply(
+          null,
+          _contracts_package_module_check_args);
+      _contracts_package_get =
+        true;
+      _contracts_fs_get =
+        false;
+    }
+    catch(
+      _error) {
+      _msg =
+        "Found no contract package module " +
+        `'${_contracts_package}'.`;
+      _msg_warning(
+        _msg);
+      _echo2(
+        _error);
+      _contracts_fs_get =
+        true;
+      // throw _error;
+    }
+    if ( _contracts_package_get ) {
+      const
+        _data_get =
+          _contracts_package_module._data_get;
+      _compiler_output =
+        "";
+      const
+        _data_get_args = [
+          _contract_name,
+          "compiler-output"    // data type
+          "path",              // output type
+          _network,            // chain id
+          _version
+        ];
+      _msg =
+        "Running '_data_get' with arguments:";
+      _msg_info(
+        _msg);
+      const
+        _global =
+          _global_get();
+      const
+        _quiet =
+          _global[
+            "quiet"];
+      if ( _quiet == "n" ) {
+        _echo(
+          _data_get_args);
+      }
+      _compiler_output =
+        _data_get.apply(
+          null,
+          _data_get_args);
+    }
+    if ( _contracts_fs_get ) {
+      try {
+        _evm_contracts_tools =
+          _get(
+            "_evm_contracts",
+            "tools");
+        _evm_contracts_tools =
+          await _evm_contracts_tools_check(
+            _evm_contracts_tools);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_evm_contracts_tools_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _evm_contracts_tools);
+        _echo2(
+          _error);
+        throw _error;
+      }
+      const
+        _app_check =
+          _evm_contracts_tools._app_check;
+      _app =
+        _app_check(
+          _app);
+      const
+        _deployment_dir_args = [
+          _deployments_dir,
+          _app_name,
+          _user_level
+        ];
+      try {
+        _deployments_dir =
+          _deployments_dir_check.apply(
+            null,
+            _deployments_dir_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_deployments_dir_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _deploymens_dir_check_args);
+        _echo2(
+          _error);
+        throw _error;
+      }
+      const
+        _configuration_format_check =
+          _evm_contracts_tools._configuration_format_check;
+      _configuration_format =
+        _configuration_format_check(
+          _configuration_format);
+      const
+        _config_file_path_check =
+          _evm_contracts_tools._config_file_path_check;
+      const
+        _config_file_path_check_args = [
+          _config_file_path,
+          _app,
+          _deployments_dir,
+          _contract_name,
+          _network,
+          _network,
+          _configuration_format,
+          _user_level
+        ];
+      try {
+        _config_file_path =
+          _config_file_path_check.apply(
+            null,
+            _config_file_path_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_config_file_path_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _config_file_path_check_args);
+        _echo2(
+          _error);
+        throw _error;
+      }
+      const
+        _contract_version_check_args = [
+          _version,
+          _app,
+          _deployments_dir,
+          _contract_name,
+          _contract_short_name,
+          _network,
+          _configuration_format,
+          _contracts_package,
+          _user_level
+        ];
+      try {
+        _version =
+          await _contract_version_check.apply(
+            null,
+            _contract_version_check_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_contract_version_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _contract_version_check_args);
+        throw _msg;
+      }
+      const
+        _contract_compiler_output_get_args = [
+          _deployments_dir,
+          _contract_name,
+          _network,
+          _version) {
+        ];
+      try {
+        _compiler_output =
+          _contract_compiler_output_get.apply(
+            null,
+            _contract_compiler_output_get_args);
+      }
+      catch(
+        _error) {
+        _msg =
+          "Error running '_contract_compiler_output_check' " +
+          "with arguments:";
+        _msg_error(
+          _msg,
+          0);
+        _echo2(
+          _contract_compiler_output_check_args);
+        _echo2(
+          _error);
+        throw _error;
+      }
+    }
+  }
+  return _compiler_output;
 }
 
 function
@@ -3095,8 +3719,11 @@ async function
 
 export {
   _contract_address_check,
+  _contract_abi_check,
   _contract_abi_get,
+  _contract_bytecode_check,
   _contract_bytecode_get,
+  _contract_compiler_output_check,
   _contract_compiler_output_get,
   _contract_setup_auto_detect,
   _contract_version_check,
@@ -3120,12 +3747,18 @@ export {
 // Common Javascript exports
 
 // module.exports = {
+//   _contract_abi_check:
+//     _contract_abi_check,
 //   _contract_abi_get:
 //     _contract_abi_get,
 //   _contract_address_check:
 //     _contract_address_check,
+//   _contract_bytecode_check:
+//     _contract_bytecode_check,
 //   _contract_bytecode_get:
 //     _contract_bytecode_get,
+//   _contract_compiler_output_check:
+//     _contract_compiler_output_check,
 //   _contract_compiler_output_get:
 //     _contract_compiler_output_get,
 //   _contract_setup_auto_detect:
