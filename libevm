@@ -2938,7 +2938,6 @@ async function
     _deployments_dir,
     _contracts_package,
     _configuration_format) {
-  ) {
   let
     _contract_abi,
     _contract_bytecode,
@@ -2957,11 +2956,9 @@ async function
       _field,
       "");
   }
-
-
   const
-    _contract_version_check_args = [
-      _contract_version,
+    _contract_abi_check_args = [
+      _contract_abi,
       _app,
       _deployments_dir,
       _contract_name,
@@ -2972,86 +2969,123 @@ async function
       _user_level
     ];
   try {
-    [ _contract_version ] =
-      await _contract_version_check.apply(
+    _contract_abi =
+      await _contract_abi_check.apply(
         null,
-        _contract_version_check_args);
+        _contract_abi_check_args);
   }
   catch(
     _error) {
     _msg =
-      "Error running '_contract_version_check' " +
+      "Error running '_contract_abi_check' " +
       "with arguments:";
     _msg_error(
       _msg,
       0);
     _echo2(
-      _contract_version_check_args);
+      _contract_abi_check_args);
     _echo2(
       _error);
     throw _error;
   }
   _msg =
-    "Obtained contract version " +
-    `'${_contract_version}'.`;
+    "Obtained contract ABI " +
+    `'${_contract_abi}'.`;
   _msg_info(
     _msg);
-  // _contract_address =
-  //   _get(
-  //     _contract_short_name,
-  //     "address");
   const
-    _contract_address_check_args = [
-      _contract_address,
+    _contract_bytecode_check_args = [
+      _contract_bytecode,
       _app,
-      _contracts_package,
+      _deployments_dir,
       _contract_name,
       _contract_short_name,
       _network,
-      _contract_version,
-      _user_level,
-      _deployments_dir
+      _configuration_format,
+      _contracts_package,
+      _user_level
     ];
   try {
-    _contract_address =
-      await _contract_address_check.apply(
+    _contract_bytecode =
+      await _contract_bytecode_check.apply(
         null,
-        _contract_address_check_args);
+        _contract_bytecode_check_args);
   }
   catch(
     _error) {
     _msg =
-      "Error running '_contract_address_check' " +
+      "Error running '_contract_bytecode_check' " +
       "with arguments:";
     _msg_error(
       _msg,
       0);
     _echo2(
-      _contract_address_check_args);
+      _contract_bytecode_check_args);
     _echo2(
       _error);
     throw _error;
   }
-  // const
-  //   _contract_address =
-  //     _get(
-  //       _contract_short_name,
-  //       "address");
+  _msg =
+    "Obtained contract bytecode " +
+    `'${_contract_bytecode}'.`;
+  _msg_info(
+    _msg);
+  const
+    _contract_compiler_output_check_args = [
+      _contract_compiler_output,
+      _app,
+      _deployments_dir,
+      _contract_name,
+      _contract_short_name,
+      _network,
+      _configuration_format,
+      _contracts_package,
+      _user_level
+    ];
+  try {
+    _contract_compiler_output =
+      await _contract_compiler_output_check.apply(
+        null,
+        _contract_compiler_output_check_args);
+  }
+  catch(
+    _error) {
+    _msg =
+      "Error running '_contract_compiler_output_check' " +
+      "with arguments:";
+    _msg_error(
+      _msg,
+      0);
+    _echo2(
+      _contract_compiler_output_check_args);
+    _echo2(
+      _error);
+    throw _error;
+  }
+  _msg =
+    "Obtained contract compiler output " +
+    `'${_contract_compiler_output}'.`;
+  _msg_info(
+    _msg);
   _msg =
     `Selected contract '${_contract_name}' ` +
-    `version '${_contract_version}' deployed ` +
-    `at address '${_contract_address}'`;
+    `with ABI '${_contract_abi}', bytecode ` +
+    `'${_contract_bytecode}' and compiler ` +
+    `'${_contract_compiler_output}'.`;
   _msg_info(
     _msg);
   _set(
     _contract_short_name,
-    "address",
-    _contract_address);
+    "abi",
+    _contract_abi);
   _set(
     _contract_short_name,
-    "version",
-    _contract_version);
-  true;
+    "bytecode",
+    _contract_bytecode);
+  _set(
+    _contract_short_name,
+    "compiler_output",
+    _contract_compiler_output);
 }
 
 async function
