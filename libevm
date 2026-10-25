@@ -439,7 +439,7 @@ async function
       const
         _data_get_args = [
           _contract_name,
-          "abi"                // data type
+          "abi",               // data type
           "path",              // output type
           _network,            // chain id
           _version
@@ -723,7 +723,7 @@ async function
       const
         _data_get_args = [
           _contract_name,
-          "bytecode"           // data type
+          "bytecode",          // data type
           "path",              // output type
           _network,            // chain id
           _version
@@ -1007,7 +1007,7 @@ async function
       const
         _data_get_args = [
           _contract_name,
-          "compiler-output"    // data type
+          "compiler-output",   // data type
           "path",              // output type
           _network,            // chain id
           _version
@@ -2948,7 +2948,7 @@ async function
   const
     _fields = [
       "abi",
-      "bytecode"
+      "bytecode",
       "compiler_output"
     ];
   for ( _field of _fields ) {
