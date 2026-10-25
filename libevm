@@ -938,7 +938,7 @@ async function
         _compiler_output);
   _msg =
     "Checking validity of contract compiler " +
-    `output path '${_bytecode}'.`;
+    `output path '${_compiler_output}'.`;
   _msg_info(
     _msg);
   if ( _compiler_output_type === "undefined" ) {
