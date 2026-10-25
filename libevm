@@ -2943,7 +2943,8 @@ async function
     _user_level,
     _deployments_dir,
     _contracts_package,
-    _configuration_format) {
+    _configuration_format,
+    _config_file_path) {
   let
     _contract_abi,
     _contract_bytecode,
@@ -2970,9 +2971,13 @@ async function
       _contract_name,
       _contract_short_name,
       _network,
+      _contract_version
+      _contracts_package,
       _configuration_format,
       _contracts_package,
-      _user_level
+      _user_level,
+      _configuration_format,
+      _config_file_path
     ];
   try {
     _contract_abi =
@@ -3007,9 +3012,13 @@ async function
       _contract_name,
       _contract_short_name,
       _network,
+      _contract_version
+      _contracts_package,
       _configuration_format,
       _contracts_package,
-      _user_level
+      _user_level,
+      _configuration_format,
+      _config_file_path
     ];
   try {
     _contract_bytecode =
@@ -3044,9 +3053,13 @@ async function
       _contract_name,
       _contract_short_name,
       _network,
+      _contract_version
+      _contracts_package,
       _configuration_format,
       _contracts_package,
-      _user_level
+      _user_level,
+      _configuration_format,
+      _config_file_path
     ];
   try {
     _contract_compiler_output =
