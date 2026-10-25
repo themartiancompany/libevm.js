@@ -496,7 +496,7 @@ async function
         _app_check(
           _app);
       const
-        _deployment_dir_args = [
+        _deployments_dir_args = [
           _deployments_dir,
           _app,
           _user_level
@@ -781,7 +781,7 @@ async function
         _app_check(
           _app);
       const
-        _deployment_dir_args = [
+        _deployments_dir_args = [
           _deployments_dir,
           _app,
           _user_level
@@ -1066,7 +1066,7 @@ async function
         _app_check(
           _app);
       const
-        _deployment_dir_args = [
+        _deployments_dir_args = [
           _deployments_dir,
           _app,
           _user_level
