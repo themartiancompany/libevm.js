@@ -348,7 +348,8 @@ async function
     _network,
     _version,
     _contracts_package,
-    _user_level) {
+    _user_level,
+    _configuration_format) {
   let
     _contracts_fs_get,
     _contracts_package_get,
@@ -367,7 +368,7 @@ async function
     `path '${_abi}'.`;
   _msg_info(
     _msg);
-  if ( _bytecode_type === "undefined" ) {
+  if ( _abi_type === "undefined" ) {
     _msg =
       "Contract ABI undefined, " +
       "auto-detecting.";
@@ -434,8 +435,8 @@ async function
       const
         _data_get =
           _contracts_package_module._data_get;
-      _abi =
-        "";
+      // probably the _version value below
+      // needs to be auto-detected as well.
       const
         _data_get_args = [
           _contract_name,
@@ -497,7 +498,7 @@ async function
       const
         _deployment_dir_args = [
           _deployments_dir,
-          _app_name,
+          _app,
           _user_level
         ];
       try {
@@ -632,7 +633,8 @@ async function
     _network,
     _version,
     _contracts_package,
-    _user_level) {
+    _user_level,
+    _configuration_format) {
   let
     _contracts_fs_get,
     _contracts_package_get,
@@ -718,8 +720,8 @@ async function
       const
         _data_get =
           _contracts_package_module._data_get;
-      _bytecode =
-        "";
+      // probably the _version value below
+      // needs to be auto-detected as well.
       const
         _data_get_args = [
           _contract_name,
@@ -781,7 +783,7 @@ async function
       const
         _deployment_dir_args = [
           _deployments_dir,
-          _app_name,
+          _app,
           _user_level
         ];
       try {
@@ -916,7 +918,8 @@ async function
     _network,
     _version,
     _contracts_package,
-    _user_level) {
+    _user_level,
+    _configuration_format) {
   let
     _contracts_fs_get,
     _contracts_package_get,
@@ -1002,8 +1005,8 @@ async function
       const
         _data_get =
           _contracts_package_module._data_get;
-      _compiler_output =
-        "";
+      // probably the _version value below
+      // needs to be auto-detected as well.
       const
         _data_get_args = [
           _contract_name,
@@ -1065,7 +1068,7 @@ async function
       const
         _deployment_dir_args = [
           _deployments_dir,
-          _app_name,
+          _app,
           _user_level
         ];
       try {
