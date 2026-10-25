@@ -3772,6 +3772,7 @@ export {
   _evm_chain_info_get,
   _evm_contracts_tools_check,
   _libevm_app_cmdline_parse,
+  _libevm_app_contract_setup,
   _libevm_app_overrides_set,
   _libevm_cmdline_parse,
   _libevm_app_global_variables,
