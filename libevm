@@ -595,7 +595,7 @@ async function
           _deployments_dir,
           _contract_name,
           _network,
-          _version) {
+          _version
         ];
       try {
         _abi =
@@ -879,7 +879,7 @@ async function
           _deployments_dir,
           _contract_name,
           _network,
-          _version) {
+          _version
         ];
       try {
         _bytecode =
@@ -1163,7 +1163,7 @@ async function
           _deployments_dir,
           _contract_name,
           _network,
-          _version) {
+          _version
         ];
       try {
         _compiler_output =
