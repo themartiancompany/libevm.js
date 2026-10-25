@@ -517,7 +517,7 @@ async function
           _msg,
           0);
         _echo2(
-          _deploymens_dir_check_args);
+          _deployments_dir_check_args);
         _echo2(
           _error);
         throw _error;
@@ -803,7 +803,7 @@ async function
           _msg,
           0);
         _echo2(
-          _deploymens_dir_check_args);
+          _deployments_dir_check_args);
         _echo2(
           _error);
         throw _error;
