@@ -349,7 +349,8 @@ async function
     _version,
     _contracts_package,
     _user_level,
-    _configuration_format) {
+    _configuration_format,
+    _config_file_path) {
   let
     _contracts_fs_get,
     _contracts_package_get,
@@ -496,7 +497,7 @@ async function
         _app_check(
           _app);
       const
-        _deployments_dir_args = [
+        _deployments_dir_check_args = [
           _deployments_dir,
           _app,
           _user_level
@@ -613,7 +614,7 @@ async function
           _msg,
           0);
         _echo2(
-          _contract_abi_check_args);
+          _contract_abi_get_args);
         _echo2(
           _error);
         throw _error;
@@ -634,7 +635,8 @@ async function
     _version,
     _contracts_package,
     _user_level,
-    _configuration_format) {
+    _configuration_format,
+    _config_file_path) {
   let
     _contracts_fs_get,
     _contracts_package_get,
@@ -781,7 +783,7 @@ async function
         _app_check(
           _app);
       const
-        _deployments_dir_args = [
+        _deployments_dir_check_args = [
           _deployments_dir,
           _app,
           _user_level
@@ -892,13 +894,13 @@ async function
       catch(
         _error) {
         _msg =
-          "Error running '_version_check' " +
+          "Error running '_contract_bytecode_get' " +
           "with arguments:";
         _msg_error(
           _msg,
           0);
         _echo2(
-          _contract_bytecode_check_args);
+          _contract_bytecode_get_args);
         _echo2(
           _error);
         throw _error;
@@ -919,7 +921,8 @@ async function
     _version,
     _contracts_package,
     _user_level,
-    _configuration_format) {
+    _configuration_format,
+    _config_file_path) {
   let
     _contracts_fs_get,
     _contracts_package_get,
@@ -1066,7 +1069,7 @@ async function
         _app_check(
           _app);
       const
-        _deployments_dir_args = [
+        _deployments_dir_check_args = [
           _deployments_dir,
           _app,
           _user_level
@@ -1177,13 +1180,13 @@ async function
       catch(
         _error) {
         _msg =
-          "Error running '_contract_compiler_output_check' " +
+          "Error running '_contract_compiler_output_get' " +
           "with arguments:";
         _msg_error(
           _msg,
           0);
         _echo2(
-          _contract_compiler_output_check_args);
+          _contract_compiler_output_get_args);
         _echo2(
           _error);
         throw _error;
