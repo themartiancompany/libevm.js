@@ -504,7 +504,7 @@ async function
         ];
       try {
         _deployments_dir =
-          _deployments_dir_check.apply(
+          await _deployments_dir_check.apply(
             null,
             _deployments_dir_check_args);
       }
@@ -601,7 +601,7 @@ async function
         ];
       try {
         _abi =
-          _contract_abi_get.apply(
+          await _contract_abi_get.apply(
             null,
             _contract_abi_get_args);
       }
@@ -790,7 +790,7 @@ async function
         ];
       try {
         _deployments_dir =
-          _deployments_dir_check.apply(
+          await _deployments_dir_check.apply(
             null,
             _deployments_dir_check_args);
       }
@@ -887,7 +887,7 @@ async function
         ];
       try {
         _bytecode =
-          _contract_bytecode_get.apply(
+          await _contract_bytecode_get.apply(
             null,
             _contract_bytecode_get_args);
       }
@@ -1076,7 +1076,7 @@ async function
         ];
       try {
         _deployments_dir =
-          _deployments_dir_check.apply(
+          await _deployments_dir_check.apply(
             null,
             _deployments_dir_check_args);
       }
@@ -1089,7 +1089,7 @@ async function
           _msg,
           0);
         _echo2(
-          _deploymens_dir_check_args);
+          _deployments_dir_check_args);
         _echo2(
           _error);
         throw _error;
@@ -1173,7 +1173,7 @@ async function
         ];
       try {
         _compiler_output =
-          _contract_compiler_output_get.apply(
+          await _contract_compiler_output_get.apply(
             null,
             _contract_compiler_output_get_args);
       }
