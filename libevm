@@ -338,7 +338,7 @@ function
   return _path;
 }
 
-function
+async function
   _contract_abi_check(
     _abi,
     _app,
@@ -622,7 +622,7 @@ function
   return _abi;
 }
 
-function
+async function
   _contract_bytecode_check(
     _bytecode,
     _app,
@@ -906,7 +906,7 @@ function
   return _bytecode;
 }
 
-function
+async function
   _contract_compiler_output_check(
     _compiler_output,
     _app,
