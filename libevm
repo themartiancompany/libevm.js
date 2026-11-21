@@ -1629,8 +1629,8 @@ function
   }
   if ( "T" in _argv ) {
     _set(
-      "api",
-      "key",
+      "call",
+      "timeout",
       _argv[
         "T"]);
   }
