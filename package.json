@@ -19,6 +19,7 @@
     "COPYING",
     "README.md",
     "dist",
+    "docs",
     "eslint.config.mjs",
     "libevm",
     "fs-worker.webpack.config.cjs",
