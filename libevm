@@ -1962,9 +1962,25 @@ async function
           "is an object, fixing.";
         _msg_info(
           _msg);
-        _target_network =
-          _target_network[
-          0];
+        try {
+          _target_network =
+            _target_network[
+            0];
+	}
+        catch(
+          _error) {
+          _msg =
+            "Error getting first element in " +
+            "the network info object:";
+          _msg_error(
+            _msg,
+            0);
+          _echo2(
+            _target_network);
+          _echo2(
+            _error);
+          throw _error;
+        }
       }
       else {
         _msg =
